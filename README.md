@@ -16,3 +16,17 @@ Tasks:
 - list of teams should be clickable (like https://www.basketball-reference.com/) <-- tons of queries
 - queries for best players in every category
 --> ex. Give the top 10 players from the years 1990-2000 who played SG, more than 20 minutes a game, on specify teams, 
+- advanced analytics using regular data
+
+
+Tables:
+
+Accounts
+FavouriteTeams
+FavouritePlayers
+FantasyTeams
+
+Teams
+PlayerInfo
+Season
+PlayerStats
