@@ -28,5 +28,33 @@ FantasyTeams
 
 Teams
 PlayerInfo
-Season
+Season  TBD
 PlayerStats
+
+
+Table Schema:
+
+#Tianchang
+Accounts (PERIMARY KEY INT uid, VARCHAR(25) user, VARCHAR(25) pwd)
+FavouriteTeams ((INT uid, CHAR(3) team_id, INT year) PRIMARY KEY)
+FavouritePlayers ((INT uid, int player_id) PRIMARY KEY)
+FantasyTeam
+
+### Dhanish
+## From basketball_team.csv
+TeamInfo (CHAR(3) PRIMARY KEY team_id, VARCHAR(25) team_name)
+
+
+## From basketball_tea.csv, later on turn 0 from confRank column into NULL
+## ... -> all columns from o_fgm to games
+TeamStats ((INT year, CHAR(3) team_id) PRIMARY KEY, INT rank, INT confRank, VARCHAR(2) playoff, ...)
+
+
+### Alex
+## From nba-players-stats/Players.csv and nba-players-stats/player_data.csv
+PlayerInfo (SERIAL PRIMARY KEY pid, 
+
+### Calder
+## From nba-players-stats/Seasons_Stats.csv
+## Everything from Seasons_Stats.csv, with (year, player, Tm) be the primary key
+PlayerStats(...)
