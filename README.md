@@ -59,7 +59,7 @@ TeamStats ((INT year, CHAR(3) team_id) PRIMARY KEY, INT rank, INT confRank, VARC
 PlayerInfo (SERIAL PRIMARY KEY pid, 
 
 # Calder
-// From nba-players-stats/Seasons_Stats.csv
+// From nba-players-stats/Seasons_Stats.csv<br/>
 // Everything from Seasons_Stats.csv, with (year, player, Tm) be the primary key
 
 PlayerStats(...)
