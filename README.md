@@ -35,9 +35,9 @@ PlayerStats
 Table Schema:
 
 # Tianchang
-Accounts (PERIMARY KEY INT uid, VARCHAR(25) user, VARCHAR(25) pwd)
-FavouriteTeams ((INT uid, CHAR(3) team_id, INT year) PRIMARY KEY)
-FavouritePlayers ((INT uid, int player_id) PRIMARY KEY)
+Accounts (PERIMARY KEY INT uid, VARCHAR(25) user, VARCHAR(25) pwd) \\
+FavouriteTeams ((INT uid, CHAR(3) team_id, INT year) PRIMARY KEY) \\
+FavouritePlayers ((INT uid, int player_id) PRIMARY KEY) \\
 FantasyTeam
 
 # Dhanish
@@ -46,7 +46,7 @@ FantasyTeam
 TeamInfo (CHAR(3) PRIMARY KEY team_id, VARCHAR(25) team_name)
 
 
-// From basketball_tea.csv, later on turn 0 from confRank column into NULL
+// From basketball_tea.csv, later on turn 0 from confRank column into NUL \\
 // ... -> all columns from o_fgm to games
 
 
