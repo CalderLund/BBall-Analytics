@@ -35,9 +35,9 @@ PlayerStats
 Table Schema:
 
 # Tianchang
-Accounts (PERIMARY KEY INT uid, VARCHAR(25) user, VARCHAR(25) pwd) \\
-FavouriteTeams ((INT uid, CHAR(3) team_id, INT year) PRIMARY KEY) \\
-FavouritePlayers ((INT uid, int player_id) PRIMARY KEY) \\
+Accounts (PERIMARY KEY INT uid, VARCHAR(25) user, VARCHAR(25) pwd) \n
+FavouriteTeams ((INT uid, CHAR(3) team_id, INT year) PRIMARY KEY) \n
+FavouritePlayers ((INT uid, int player_id) PRIMARY KEY) \n
 FantasyTeam
 
 # Dhanish
