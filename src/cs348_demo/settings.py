@@ -25,7 +25,7 @@ SECRET_KEY = 'y!6bdh9__uc)m2q(3kywbr4!9_-+lh%g2$y!^vk-&h_^8=@ax('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["cs348demo-266623.appspot.com", "127.0.0.1"]
+ALLOWED_HOSTS = ["bball-analytics.appspot.com", "127.0.0.1"]
 
 
 # Application definition
@@ -77,9 +77,17 @@ WSGI_APPLICATION = 'cs348_demo.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bball-analytics-db',
+        'USER': 'postgres',
+        'PASSWORD': 'cs348family',
+        'HOST': '104.198.19.139',
+        'PORT': '5432',
     }
 }
 
