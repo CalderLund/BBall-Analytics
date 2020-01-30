@@ -1,14 +1,14 @@
-To host the app locally:
+# To host the app locally:
 
-# change to source code directory
+### change to source code directory
 cd src/
 
-# download all required libraries
+### download all required libraries
 pip3 install -r requirements.txt
 
-# host server locally
+### host server locally
 python3 manage.py runserver
 
 
-To access the app deployed by GCP:
+# To access the app deployed by GCP:
 Go to: https://bball-analytics.appspot.com/
