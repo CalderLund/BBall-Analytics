@@ -1,4 +1,26 @@
+Group Member:
+
 Calder Lund
-Alex Xu
 Tianchang Zhang
 Dhanish Kakkar
+Alex Xu
+
+
+
+Responsibilities (so far):
+
+Calder:
+- Look for historical NBA Data
+- Create and design tables that store player's season stats
+
+Tianchang:
+- Create and design tables that stores user account info
+- Create and design tables that records each user's favourite player, favourite team and fantasy team
+
+Dhanish:
+- Create an entry point of app using Django and deploy it on GCP
+- Create and design tables that records each team's information
+
+Alex:
+- Create a new project and Postgres database on GCP
+- Create and design tables that stores player's information
