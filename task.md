@@ -62,4 +62,8 @@ PlayerInfo (SERIAL PRIMARY KEY pid,
 // From nba-players-stats/Seasons_Stats.csv<br/>
 // Everything from Seasons_Stats.csv, with (year, player, Tm) be the primary key
 
+Alex add-on:
+Find one case where a player played on the same team the same year with different positions
+We can either choose (year, player, Tm, Pos) to be the primary key or DELETE THAT PLAYER (since he's the only exception out of 20k data)
+
 PlayerStats(...)
