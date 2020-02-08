@@ -18,3 +18,6 @@ INSERT INTO FavouriteTeams VALUES(1, 'TMD', 1940);
 
 --add Favourite Player
 INSERT INTO FavouritePlayers VALUES(1, 'TMD');
+
+--add fantasy team
+INSERT INTO FantasyTeam VALUES('My Fantasy Team', 1);
