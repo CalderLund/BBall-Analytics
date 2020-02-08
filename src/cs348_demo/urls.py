@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from teams.views import home_view
+from teams.views import home_view, teamsInYear_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", home_view),
+    path("teams/year/<int:year>", teamsInYear_view),
 ]
