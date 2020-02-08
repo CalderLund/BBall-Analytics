@@ -7,3 +7,4 @@ runtime_config:
 
 beta_settings:
   cloud_sql_instances: bball-analytics:us-central1:bball-analytics-db
+  
