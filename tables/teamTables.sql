@@ -8,6 +8,8 @@ CREATE TABLE TeamStats
 (
     yr INT NOT NULL,
     team_id VARCHAR(3) NOT NULL,
+    rank INT,
+    confRank INT,
     o_fgm INT,
     o_fga INT,
     o_ftm INT,
@@ -56,4 +58,13 @@ CREATE TABLE TeamStats
     games INT,
     PRIMARY KEY(yr, team_id),
     FOREIGN KEY(team_id) REFERENCES TeamInfo(team_id)
+);
+
+CREATE TABLE TeamStatAndInfo (
+    yr INT NOT NULL,
+    stats_team_id VARCHAR(3) NOT NULL,
+    team_id VARCHAR(3),
+    PRIMARY KEY(yr, stat_team_id),
+    FOREIGN KEY(team_id) REFERENCES TeamInfo(team_id),
+    FOREIGN KEY(yr, stats_team_id) REFERENCES TeamStats(yr, team_id)
 );
