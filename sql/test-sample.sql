@@ -21,3 +21,6 @@ INSERT INTO FavouritePlayers VALUES(1, 'TMD');
 
 --add fantasy team
 INSERT INTO FantasyTeam VALUES('My Fantasy Team', 1);
+
+--add team member to fantasy team
+INSERT INTO FantasyTeamMember VALUES('My Fantasy Team', 1, 'Nelson Bobb');
