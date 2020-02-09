@@ -38,6 +38,7 @@ def deleteAllTeams():
     c = connection.cursor()
     try:
         c.execute("DELETE from TeamInfo")
+        print("Deleted TeamInfo")
     finally:
         c.close()
 
@@ -45,6 +46,7 @@ def deleteAllTeamStats():
     c = connection.cursor()
     try:
         c.execute("DELETE from TeamStats")
+        print("Deleted TeamStats")
     finally:
         c.close()
 
@@ -52,7 +54,7 @@ def insertIntoTeamInfo():
     c = connection.cursor()
     try:
         c.execute("INSERT into TeamInfo VALUES (%s, %s)", ["pqr", "Test Team 3"])
-        print("Inserted!")
+        print("Inserted TeamInfo")
     finally:
         c.close()
 
@@ -60,7 +62,7 @@ def insertIntoTeamStats():
     c = connection.cursor()
     try:
         c.execute("INSERT into TeamStats VALUES (%s, %s)", ["2020", "BOS"])
-        print("Inserted!")
+        print("Inserted TeamStats")
     finally:
         c.close()
 

@@ -1,26 +1,18 @@
--- Displaying all teams in our database since 1940's
-select distinct team_name from
-    (TeamInfo join TeamStatAndInfo on TeamInfo.team_id = TeamStatAndInfo.stats_team_id)
-where yr >= 1940
+--get all teams in a year(say 2010 in this case)
+SELECT TeamInfo.team_id, team_name, yr from TeamInfo NATURAL JOIN TeamStats WHERE yr=2010
 
---filtering teams by year
---given input
-select distinct team_name from
-    (TeamInfo join TeamStatAndInfo on TeamInfo.team_id = TeamStatAndInfo.stats_team_id)
-where yr = <input>
+--count the number of teams in a year (say 2010 in this case)
+SELECT count(*) from (SELECT TeamInfo.team_id, team_name, yr from TeamInfo NATURAL JOIN TeamStats WHERE yr=2010) AS R
 
 --user modify db
---create account
-INSERT INTO Accounts VALUES (1, 'administrator', 'cs348family');
+--insert team info
+INSERT into TeamInfo VALUES ('pqr', 'Test Team 3')
 
---add Favourite Teams
-INSERT INTO FavouriteTeams VALUES(1, 'TMD', 1940);
+--insert team stats
+INSERT into TeamStats VALUES ('2020', 'BOS')
 
---add Favourite Player
-INSERT INTO FavouritePlayers VALUES(1, 'TMD');
+--delete team info
+DELETE from TeamInfo
 
---add fantasy team
-INSERT INTO FantasyTeam VALUES('My Fantasy Team', 1);
-
---add team member to fantasy team
-INSERT INTO FantasyTeamMember VALUES('My Fantasy Team', 1, 'Nelson Bobb');
+--delete team stats
+DELETE from TeamStats
