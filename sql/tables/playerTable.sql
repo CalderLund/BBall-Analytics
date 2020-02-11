@@ -66,21 +66,3 @@ CREATE TABLE Player
       PTS INT
   );
 
-   CREATE TABLE PlayerStatsToPlayer (
-      playerStats_name VARCHAR(50) NOT NULL,
-      playerStats_year INT NOT NULL,
-      playerStats_teamID INT NOT NULL,
-      player_name VARCHAR(50) NOT NULL,
-      PRIMARY KEY(playerStats_name, playerStats_year, playerStats_teamID),
-      FOREIGN KEY(playerStats_name, playerStats_year, playerStats_teamID) REFERENCES PlayerStats(name, year, teamID),
-      FOREIGN KEY(player_name) REFERENCES Player(name)
-   );
-
-   CREATE TABLE  isMember (
-        name VARCHAR(50) NOT NULL,
-        team_id VARCHAR(3) NOT NULL,
-        year INT NOT NULL,
-        PRIMARY KEY(name, team_id, year),
-        FOREIGN KEY(name) REFERENCES Player,
-        FOREIGN KEY(team_id) REFERENCES TeamInfo,
-   )
