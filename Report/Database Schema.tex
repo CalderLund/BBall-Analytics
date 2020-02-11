@@ -1,0 +1,41 @@
+\documentclass[11pt]{article}
+\usepackage{amsthm}
+\usepackage{fullpage}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[]{algorithm2e}
+\usepackage[normalem]{ulem}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bf Database Schema}
+\end{center}
+
+\section*{Assumption:}
+
+\begin{itemize}
+	\item All players in our data have a unique name ('Firstname + Lastname').
+	\item In the same year, a player can switch between different teams but does not change his position within the same team.
+	\item Each NBA team has a unique team ID.
+	\item {\bf account.uid} is unique.
+	\item Users can have duplicated username.
+	\item Each account cannot build multiple fantasy teams with the same name but different accounts can.
+	\item User built fantasy teams must have a fixed team size of 5.
+\end{itemize}
+
+\newpage
+
+\begin{figure} 
+  \includegraphics[scale=0.5]{./"ER Diagram".png}
+\end{figure}
+\newpage
+
+
+
+\end{document}
