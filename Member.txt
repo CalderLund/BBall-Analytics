@@ -10,12 +10,14 @@ Alex Xu
 Responsibilities (so far):
 
 Calder:
+Milestone 0
 - Look for historical NBA Data
 - Create and design tables that store player's season stats
 - Write the milestone 1 report.pdf file meeting all the requirements 
   specified in the course project rubric
 
 Tianchang:
+Milestone 0
 - Create and design tables that stores user account info
 - Create and design tables that records each user's favourite player, 
   favourite team and fantasy team
@@ -28,5 +30,6 @@ Milestone 1
 - Code implementing a simple but working database-driven application which can serve as a starting point for completing our project
 
 Alex:
+Milestone 0
 - Create a new project and Postgres database on GCP
 - Create and design tables that stores player's information
