@@ -23,6 +23,7 @@ Tianchang:
 Dhanish:
 - Create an entry point of app using Django and deploy it on GCP
 - Create and design tables that records each team's information
+- Code implementing a simple but working database-driven application which can serve as a starting point for completing our project
 
 Alex:
 - Create a new project and Postgres database on GCP
