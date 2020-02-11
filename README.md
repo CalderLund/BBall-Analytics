@@ -15,7 +15,7 @@ Go to: https://bball-analytics.appspot.com/
 
 # Information regarding Milestone 01:
 
-### Files regarding Database Design Schema can be founf under /Report directory
+### Files related to Database Design Schema can be found under /Report directory
 
 ### You can find the schema definition of all the tables under /sql/tables 
 ### You can find test-sample.sql and test-sample.output under /sql
@@ -28,5 +28,5 @@ Go to: https://bball-analytics.appspot.com/
 ### 1. That displays all unique basketball teams that have played since the 1930's
 ### 2. That takes year as a user input and displays all basketball teams that played in that particular year. User Input comes through a drop-down menu of years
 
-### Source code can be found under /src directory
+### Relevant source code can be found under /src/teams directory
  
