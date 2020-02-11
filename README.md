@@ -9,8 +9,8 @@ pip3 install -r requirements.txt
 ### host server locally
 python3 manage.py runserver
 
-## NOTE: You might not be able to host the app locally because the Lib folder is not present.
-## We removed Lib folder in order to keep the size within Markus upload maximum.
+### NOTE: You might not be able to host the app locally because the Lib folder is not present.
+### We removed Lib folder in order to keep the size within Markus upload maximum.
 
 
 # To access the app deployed by GCP:
