@@ -13,6 +13,8 @@ python3 manage.py runserver
 # To access the app deployed by GCP:
 Go to: https://bball-analytics.appspot.com/
 
+# Information regarding Milestone 01:
+
 ### You can find the schema definition of all the tables under /sql/tables 
 ### You can find test-sample.sql and test-sample.output under /sql
 
