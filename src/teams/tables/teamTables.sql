@@ -60,11 +60,4 @@ CREATE TABLE TeamStats
     FOREIGN KEY(team_id) REFERENCES TeamInfo(team_id)
 );
 
-CREATE TABLE TeamStatAndInfo (
-    yr INT NOT NULL,
-    stats_team_id VARCHAR(3) NOT NULL,
-    team_id VARCHAR(3),
-    PRIMARY KEY(yr, stat_team_id),
-    FOREIGN KEY(team_id) REFERENCES TeamInfo(team_id),
-    FOREIGN KEY(yr, stats_team_id) REFERENCES TeamStats(yr, team_id)
-);
+

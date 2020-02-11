@@ -13,5 +13,20 @@ python3 manage.py runserver
 # To access the app deployed by GCP:
 Go to: https://bball-analytics.appspot.com/
 
-### You can find all the tables under /sql/tables 
+# Information regarding Milestone 01:
+
+### Files related to Database Design Schema can be found under /Report directory
+
+### You can find the schema definition of all the tables under /sql/tables 
 ### You can find test-sample.sql and test-sample.output under /sql
+
+### Within our application, see /src/teams/models.py:
+### 1. For code that creates our tables
+### 2. For code that uses pandas to scrape real data from csv files to populate the tables "TeamsInfo" and "TeamStats"
+
+### We used Django to implement a simple Database-Driven Application:
+### 1. That displays all unique basketball teams that have played since the 1930's
+### 2. That takes year as a user input and displays all basketball teams that played in that particular year. User Input comes through a drop-down menu of years
+
+### Relevant source code can be found under /src/teams directory
+ 
