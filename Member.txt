@@ -21,8 +21,10 @@ Tianchang:
   favourite team and fantasy team
 
 Dhanish:
+Milestone 0
 - Create an entry point of app using Django and deploy it on GCP
 - Create and design tables that records each team's information
+Milestone 1
 - Code implementing a simple but working database-driven application which can serve as a starting point for completing our project
 
 Alex:
