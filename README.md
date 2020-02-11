@@ -15,8 +15,6 @@ Go to: https://bball-analytics.appspot.com/
 
 # Information regarding Milestone 01:
 
-### Report.pdf can found under the /Report directory
-
 ### You can find the schema definition of all the tables under /sql/tables 
 ### You can find test-sample.sql and test-sample.output under /sql
 
