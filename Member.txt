@@ -33,3 +33,7 @@ Alex:
 Milestone 0
 - Create a new project and Postgres database on GCP
 - Create and design tables that stores player's information
+Milestone 1
+- Disign and create ER diagram to express the relation between tables
+- List all the asumptions
+- Create relation diagram
