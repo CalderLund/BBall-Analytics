@@ -12,10 +12,13 @@ Responsibilities (so far):
 Calder:
 - Look for historical NBA Data
 - Create and design tables that store player's season stats
+- Write the milestone 1 report.pdf file meeting all the requirements 
+  specified in the course project rubric
 
 Tianchang:
 - Create and design tables that stores user account info
-- Create and design tables that records each user's favourite player, favourite team and fantasy team
+- Create and design tables that records each user's favourite player, 
+  favourite team and fantasy team
 
 Dhanish:
 - Create an entry point of app using Django and deploy it on GCP
