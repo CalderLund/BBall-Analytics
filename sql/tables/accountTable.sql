@@ -9,8 +9,7 @@ CREATE TABLE Accounts
   (
      uid  INT NOT NULL,
      team_id VARCHAR(3) NOT NULL,
-     year INT NOT NULL,
-     PRIMARY KEY(uid, team_id, year),
+     PRIMARY KEY(uid, team_id),
      FOREIGN KEY(uid) REFERENCES Accounts
   );
 
