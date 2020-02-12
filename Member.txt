@@ -13,6 +13,7 @@ Calder:
 Milestone 0
 - Look for historical NBA Data
 - Create and design tables that store player's season stats
+Milestone 1
 - Write the milestone 1 report.pdf file meeting all the requirements 
   specified in the course project rubric
 
@@ -21,6 +22,8 @@ Milestone 0
 - Create and design tables that stores user account info
 - Create and design tables that records each user's favourite player, 
   favourite team and fantasy team
+Milestone 1
+- Write sql queries to create tables based on ER diagram
 
 Dhanish:
 Milestone 0
@@ -34,6 +37,5 @@ Milestone 0
 - Create a new project and Postgres database on GCP
 - Create and design tables that stores player's information
 Milestone 1
-- Disign and create ER diagram to express the relation between tables
-- List all the asumptions
-- Create relation diagram
+- Create ER diagram and relational diagram
+- List all the assumptions
