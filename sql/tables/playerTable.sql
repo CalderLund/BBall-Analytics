@@ -16,7 +16,6 @@ CREATE TABLE Player
       PRIMARY KEY(name, year, teamID),
       pos VARCHAR(50),
       age INT,
-      Tm VARCHAR(3),
       G INT,
       GS INT,
       MP INT,
