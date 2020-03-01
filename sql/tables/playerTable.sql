@@ -4,9 +4,9 @@ CREATE TABLE Player
      height INT,
      weight INT,
      collage VARCHAR(50),
-     birthCity VARCHAR(50),
-     birthState VARCHAR(50),
      born INT,
+     birthCity VARCHAR(50),
+     birthState VARCHAR(50)
   );
 
   CREATE TABLE PlayerStats (
