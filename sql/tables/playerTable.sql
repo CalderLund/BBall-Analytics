@@ -10,7 +10,7 @@ CREATE TABLE Player
   );
 
   CREATE TABLE PlayerStats (
-      name VARCHAR(50) NOT NULL,
+      name VARCHAR(50) NOT NULL REFERENCES Player(name),
       year INT NOT NULL,
       teamID INT NOT NULL,
       PRIMARY KEY(name, year, teamID),
