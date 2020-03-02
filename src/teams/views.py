@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
-from .models import getGuestbookRows, insertIntoTeamInfo, insertIntoTeamStats, populateData, populateTeamStatsData, deleteAllTeams, deleteAllTeamStats, dropTeamsInfo, createTeamsInfo, createTeamStats, getTeamStats, countTeamStats, getAllteamsInAYear, countTeamsInAYear
+from .models import (getGuestbookRows, insertIntoTeamInfo, insertIntoTeamStats, populateData, populateTeamStatsData, deleteAllTeams, deleteAllTeamStats, dropTeamsInfo, createTeamsInfo, createTeamStats, getTeamStats, countTeamStats, getAllteamsInAYear, countTeamsInAYear,
+dropTeamStats)
 
 # Create your views here.
 
@@ -19,6 +20,7 @@ def home_view(request):
         # insertIntoTeamStats()
         # getTeamStats()
         # deleteAllTeamStats()
+        # dropTeamStats()
         # populateTeamStatsData()
         # getTeamStats()
         teamsInfo = getGuestbookRows()
