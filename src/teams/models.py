@@ -196,7 +196,6 @@ def countTeamStats():
 
 
 def getAllteamsInAYear(year):
-    pass
     c = connection.cursor()
     try:
         rows = c.execute("SELECT TeamInfo.team_id, team_name, yr from TeamInfo NATURAL JOIN TeamStats WHERE yr={}".format(year))
@@ -207,12 +206,31 @@ def getAllteamsInAYear(year):
         c.close()
 
 def countTeamsInAYear(year):
-    pass
     c = connection.cursor()
     try:
         rows = c.execute("SELECT count(*) from (SELECT TeamInfo.team_id, team_name, yr from TeamInfo NATURAL JOIN TeamStats WHERE yr={}) AS R".format(year))
         rows = c.fetchall()
         print(rows)
         return rows
+    finally:
+        c.close()
+
+def getAllYearsOfATeam(tmId):
+    c = connection.cursor()
+    try:
+        years = c.execute("SELECT yr from TeamStats WHERE team_id='{}'".format(tmId))
+        years = c.fetchall()
+        print("Fetched all years for team {}".format(tmId))
+        return years
+    finally:
+        c.close()
+
+def getTeamInfoFromAYear(tmId, year):
+    c = connection.cursor()
+    try:
+        teamInfo = c.execute("SELECT tm_rank, won, lost, games, homeWon, homeLost, awayWon, awayLost, neutWon, neutLoss from TeamStats WHERE team_id='{}' AND yr='{}'".format(tmId, year))
+        teamInfo = c.fetchall()
+        print("Fetched team info for {} from {}".format(tmId, year))
+        return teamInfo
     finally:
         c.close() 
