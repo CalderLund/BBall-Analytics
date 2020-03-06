@@ -16,6 +16,9 @@ Milestone 0
 Milestone 1
 - Write the milestone 1 report.pdf file meeting all the requirements 
   specified in the course project rubric
+Milestone 2
+- Edit and finish report.pdf
+- Feature 2: Complicated user queries (SQL python side)
 
 Tianchang:
 Milestone 0
@@ -24,6 +27,9 @@ Milestone 0
   favourite team and fantasy team
 Milestone 1
 - Write sql queries to create tables based on ER diagram
+Milestone 2
+- Update README.md
+- Feature 3: Create views for advanced metrics
 
 Dhanish:
 Milestone 0
@@ -31,6 +37,8 @@ Milestone 0
 - Create and design tables that records each team's information
 Milestone 1
 - Code implementing a simple but working database-driven application which can serve as a starting point for completing our project
+Milestone 2
+- Feature 1: Select teams from year, then select players from teams, then view stats for player (see image in report.pdf)
 
 Alex:
 Milestone 0
@@ -39,3 +47,6 @@ Milestone 0
 Milestone 1
 - Create ER diagram and relational diagram
 - List all the assumptions
+Milestone 2
+- Update ER diagram
+- Feature 2: Complicated user queries (Django front end)

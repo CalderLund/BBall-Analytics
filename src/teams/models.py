@@ -26,7 +26,7 @@ def populateTeamStatsData():
     try:
         for index,row in teams.iterrows():
             counter += 1
-            c.execute("INSERT into TeamStats VALUES (%s, %s)", [row["year"], row["tmID"]])
+            c.execute("INSERT into TeamStats VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [row["year"], row["tmID"], row["rank"], row["confRank"], row["playoff"], row["o_fgm"], row["o_fga"], row["o_ftm"], row["o_fta"], row["o_3pm"], row["o_3pa"], row["o_oreb"], row["o_dreb"], row["o_reb"], row["o_asts"], row["o_pf"], row["o_stl"], row["o_to"], row["o_blk"], row["o_pts"], row["d_fgm"], row["d_fga"], row["d_ftm"], row["d_fta"], row["d_3pm"], row["d_3pa"], row["d_oreb"], row["d_dreb"], row["d_reb"], row["d_asts"], row["d_pf"], row["d_stl"], row["d_to"], row["d_blk"], row["d_pts"], row["o_tmRebound"], row["d_tmRebound"], row["homeWon"], row["homeLost"], row["awayWon"], row["awayLost"], row["neutWon"], row["neutLoss"], row["confWon"], row["confLoss"], row["divWon"], row["divLoss"], row["pace"], row["won"], row["lost"], row["games"]])
             # print(row["tmID"], row["name"])
         print("-----------------")
         print("c= {}".format(counter))
@@ -89,6 +89,14 @@ def createTeamsInfo():
     finally:
         c.close()
 
+def dropTeamStats():
+    c = connection.cursor()
+    try:
+        c.execute("DROP TABLE TeamStats")
+        print("Dropped!")
+    finally:
+        c.close()
+
 def createTeamStats():
     c = connection.cursor()
     try:
@@ -97,6 +105,9 @@ def createTeamStats():
 (
     yr INT NOT NULL,
     team_id VARCHAR(3) NOT NULL,
+    tm_rank INT,
+    confRank INT,
+    playoff VARCHAR(3),
     o_fgm INT,
     o_fga INT,
     o_ftm INT,
@@ -185,7 +196,6 @@ def countTeamStats():
 
 
 def getAllteamsInAYear(year):
-    pass
     c = connection.cursor()
     try:
         rows = c.execute("SELECT TeamInfo.team_id, team_name, yr from TeamInfo NATURAL JOIN TeamStats WHERE yr={}".format(year))
@@ -196,12 +206,31 @@ def getAllteamsInAYear(year):
         c.close()
 
 def countTeamsInAYear(year):
-    pass
     c = connection.cursor()
     try:
         rows = c.execute("SELECT count(*) from (SELECT TeamInfo.team_id, team_name, yr from TeamInfo NATURAL JOIN TeamStats WHERE yr={}) AS R".format(year))
         rows = c.fetchall()
         print(rows)
         return rows
+    finally:
+        c.close()
+
+def getAllYearsOfATeam(tmId):
+    c = connection.cursor()
+    try:
+        years = c.execute("SELECT yr from TeamStats WHERE team_id='{}'".format(tmId))
+        years = c.fetchall()
+        print("Fetched all years for team {}".format(tmId))
+        return years
+    finally:
+        c.close()
+
+def getTeamInfoFromAYear(tmId, year):
+    c = connection.cursor()
+    try:
+        teamInfo = c.execute("SELECT tm_rank, won, lost, games, homeWon, homeLost, awayWon, awayLost, neutWon, neutLoss from TeamStats WHERE team_id='{}' AND yr='{}'".format(tmId, year))
+        teamInfo = c.fetchall()
+        print("Fetched team info for {} from {}".format(tmId, year))
+        return teamInfo
     finally:
         c.close() 

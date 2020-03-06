@@ -1,0 +1,38 @@
+<h1>Basketball Analytics!</h1>
+
+<button style="margin-bottom: 20px; margin-right: 15px"><a href="/">Go Back To Home Page</a></button>
+
+<button style="margin-bottom: 20px"><a href="/team/{{tmId}}/{{teamName}}">Go Back To Years {{teamName}} played in</a></button>
+
+<button style="margin-bottom: 20px"><a href="/teams/year/{{year}}">Go Back To Teams that played in {{year}}</a></button>
+
+<p>Performance Summary of <strong>{{teamName}}</strong> in the year <strong>{{year}}</strong></p>
+
+<table style="border: 1px solid black">
+    <tr>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Rank</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Won</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Lost</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Games</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Home Won</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Home Lost</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Away Won</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Away Lost</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Neutral Won</th>
+        <th style="text-align: left; border-bottom: 1px solid black">Neutral Lost</th>
+    </tr>
+    {% for info in teamInfo %}
+        <tr>
+            <td style="text-align: left; border-right: 1px solid black">{{info.0}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{info.1}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{info.2}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{info.3}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{info.4}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{info.5}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{info.6}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{info.7}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{info.8}}</td>
+            <td style="text-align: left">{{info.9}}</td>
+        </tr>
+    {% endfor %}
+</table>
