@@ -281,3 +281,45 @@ def getSomePlayerStats():
         return stats
     finally:
         c.close()
+
+
+def createWhereCondition(attributes):
+    """
+    Creates the where portion of filtering conditions.
+    (So far, can only be used reliably for PlayerStats,
+     but, it should work for most tables.)
+
+    :param attributes: dict
+    :return: str
+    """
+    where = ""
+    if len(attributes):
+        for key, value in attributes:
+            if key.endswith("_greater"):
+                key = key.strip("_greater")
+                # probably need error checking here
+                where += key + " >= " + value + ", "
+            elif key.endswith("_less"):
+                key = key.strip("_less")
+                # probably need error checking here
+                where += key + " < " + value + ", "
+            elif key in ("name", "teamID", "pos"):
+                where += key + " == '" + value + "', "
+            else:
+                where += key + " == " + value + ", "
+
+        where = where[:-2] + ";"
+        return where
+
+def filterPlayers(attributes):
+    c = connection.cursor()
+    try:
+        where = createWhereCondition(attributes)
+        if where is None:
+            rows = c.execute("SELECT * from PlayerStats;")
+        else:
+            rows = c.execute("SELECT * from PlayerStats WHERE " + where)
+        rows = c.fetchall()
+        return rows
+    finally:
+        c.close()

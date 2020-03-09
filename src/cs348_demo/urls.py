@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from teams.views import home_view, teamsInYear_view, yearsOfATeam_view, teamInfoInYear_view
-from players.views import playerSetup
+from players.views import playerSetup, playerFiltering
 
 urlpatterns = [
     path('admin/', admin.site.urls),

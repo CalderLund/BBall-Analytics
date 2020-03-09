@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from .models import filterPlayers
 
 from .models import (createPlayerTable, dropTablePlayer, deleteAllRowsFromPlayer, populatePlayerData, getAllPlayers, createPlayerStatsTable,
 dropTablePlayerStats, deleteAllRowsFromPlayerStats, populatePlayerStatsData, insertIntoPlayerStats, getSomePlayerStats)
@@ -29,10 +30,11 @@ def playerFiltering(request, json):
 
     I process it to return a
     """
+    # convert to dictionary
     vals = dict(json)
 
     # do stuff to filter players in players/models.py using vals
     # return query_result
-    query_result = ()
+    query_result = filterPlayers(vals)
 
     return render(request, "topplayers.html", {"query_result": query_result})
