@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from teams.views import home_view, teamsInYear_view, yearsOfATeam_view, teamInfoInYear_view
-from players.views import playerSetup, playerFiltering
+from players.views import playerSetup, playerFiltering, playerInfo_view, playerStats_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,6 @@ urlpatterns = [
     path("players/filter/<str:json>", playerFiltering),
     path("team/<str:tmId>/<str:tmName>/", yearsOfATeam_view),
     path("team/<str:tmId>/<str:tmName>/<int:year>/", teamInfoInYear_view),
+    path("player_stats/<str:tmId>/<str:tmName>/<int:year>/", playerInfo_view),
+    path("player_stats/<str:tmId>/<str:tmName>/<int:year>/<str:playerName>/", playerStats_view),
 ]
