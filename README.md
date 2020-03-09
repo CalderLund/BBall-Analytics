@@ -33,7 +33,7 @@ Go to: https://bball-analytics.appspot.com/
 
 ### Relevant source code can be found under /src/teams directory
 
-### Do the following to run the app locally:
+# Do the following to run the app locally:
 ### 1. Go to /src and type ./cloud_sql_proxy -instances=bball-analytics:us-central1:bball-analytics-db=tcp:5432
 ### 2. In a new terminal, type python manage.py runserver
 
