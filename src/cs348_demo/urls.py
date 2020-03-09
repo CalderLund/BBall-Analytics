@@ -24,6 +24,7 @@ urlpatterns = [
     path("", home_view),
     path("teams/year/<int:year>", teamsInYear_view),
     path("players/", playerSetup),
+    path("players/filter/<str:json>", playerFiltering),
     path("team/<str:tmId>/<str:tmName>/", yearsOfATeam_view),
     path("team/<str:tmId>/<str:tmName>/<int:year>/", teamInfoInYear_view),
 ]
