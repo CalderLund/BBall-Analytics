@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from teams.views import home_view, teamsInYear_view, yearsOfATeam_view, teamInfoInYear_view
-from players.views import playerSetup
-
+from players.views import playerSetup, topplayers_view, player_select_result_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", home_view),
     path("teams/year/<int:year>", teamsInYear_view),
-    path("players/", playerSetup),
+    # path("players/", playerSetup),
     path("team/<str:tmId>/<str:tmName>/", yearsOfATeam_view),
     path("team/<str:tmId>/<str:tmName>/<int:year>/", teamInfoInYear_view),
+    path("players/", topplayers_view),
+    path("players/player_select_result", player_select_result_view)
 ]
