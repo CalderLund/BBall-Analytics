@@ -2,4 +2,119 @@
 
 <h1>Basketball Analytics!</h1>
 
+<button style="margin-bottom: 20px; margin-right: 15px; position: relative;"><a href="/players">Go Back Player Filter</a></button>
+
+<table style="border: 1px solid black; margin-bottom: 20px">
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Name</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Year</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Team</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Position</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Age</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">G</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">GS</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">MP</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">PER</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">TS%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">3PAr</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FTr</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">ORB%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">DRB%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">TRB%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">AST%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">STL%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">BLK%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">TOV%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">USG%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">blanl</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">OWS</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">DWS</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">WS</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">WS/48</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">blank2</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">OBPM</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">DBPM</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">BPM</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">VORP</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FG</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FGA</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FG%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">3P</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">3PA</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">3P%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">2P</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">2PA</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">2P%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">eFG%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FT</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FTA</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FT%</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">ORB</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">DRB</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">TRB</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">AST</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">STL</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">BLK</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">TOV</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">PF</th>
+	<th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">PTS</th>
+    {% for row in query_result %}
+        <tr>
+        	<td style="text-align: left; border-right: 1px solid black">{{row.0}}</td>
+        	<td style="text-align: left; border-right: 1px solid black">{{row.1}}</td>
+        	<td style="text-align: left; border-right: 1px solid black">{{row.2}}</td>
+        	<td style="text-align: left; border-right: 1px solid black">{{row.3}}</td>
+        	<td style="text-align: left; border-right: 1px solid black">{{row.4}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.5}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.6}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.7}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.8}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.9}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.10}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.11}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.12}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.13}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.14}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.15}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.16}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.17}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.18}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.19}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.20}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.21}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.22}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.23}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.24}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.25}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.26}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.27}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.28}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.29}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.30}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.31}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.32}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.33}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.34}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.35}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.36}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.37}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.38}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.39}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.40}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.41}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.42}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.43}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.44}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.45}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.46}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.47}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.48}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.49}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.50}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.51}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.52}}</td>
+			<td style="text-align: left; border-right: 1px solid black">{{row.53}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
 {% comment %} {% endblock %} {% endcomment %}

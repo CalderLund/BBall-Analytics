@@ -335,14 +335,18 @@ def createWhereCondition(attributes):
             if key == "Pos":
                 values = value.split("-")
                 if len(values) == 2:
-                    where += "(Pos == '" + values[0] + "' OR Pos == '" + values[1] + \
-                             "' OR Pos == '" + value + "') AND "
+                    where += "(pos = '" + values[0] + "' OR pos = '" + values[1] + \
+                             "' OR pos = '" + value + "') AND "
                 if len(values) == 1:
-                    where += "Pos == '" + values[0] + "' AND "
+                    where += "pos = '" + values[0] + "' AND "
             elif key in ("name", "teamID"):
-                where += key + " == '" + value + "' AND "
-            else:
-                where += key + " < " + value + " AND "
+                where += key + " = '" + value + "' AND "
+            elif key == "start_year":
+                where += "year >= " + value + " AND "
+            elif key == "end_year":
+                where += "year <= " + value + " AND "
+            elif key != "csrfmiddlewaretoken":
+                where += key + " > " + value + " AND "
 
         where = where[:-5] + ";"
         return where

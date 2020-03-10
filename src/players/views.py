@@ -25,9 +25,19 @@ def playerSetup(request):
 def topplayers_view(request):
 
     if request.method == "POST":
-        print(request.POST)
-        query_result = filterPlayers(request.POST)
-        return render(request, "player_select_result.html", {"query_result": query_result})
+        input_value = request.POST.copy()
+        input_value.pop('csrfmiddlewaretoken', None)
+        length = len(input_value) - 2
+        print(input_value)
+        query_result = filterPlayers(input_value)
+        input_value.pop('start_year', None)
+        input_value.pop('end_year', None)
+        print(len(query_result[0]))
+        print(query_result)
+
+        return render(request, "player_select_result.html", {"query_result": query_result,
+                                                             "attributes": input_value,
+                                                             "column_num": range(length)})
 
     return render(request, "topplayers.html")
 
