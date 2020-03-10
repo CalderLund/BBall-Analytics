@@ -41,7 +41,7 @@ You can find test-sample.sql and test-sample.output under /sql
   4. /src/players/views.py  directory
   
   
-  ### Features 
-  # Advanced Matrix /src/teams/tables/advanceMetricsView.sql
+  # Features 
+  ### Advanced Matrix /src/teams/tables/advanceMetricsView.sql
   The view 36 min caculates the average data(include, PER, TS%, offensive rating, defensive rating, rebound rate, game
 score, etc) in a period of 36 min. This advanced metrix is very helpful when interpreting given data for each player and team. 
