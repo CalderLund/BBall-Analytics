@@ -89,7 +89,7 @@ def createPlayerStatsTable():
       STL_percent FLOAT DEFAULT 0,
       BLK_percent FLOAT DEFAULT 0,
       TOV_percent FLOAT DEFAULT 0,
-      USG_percent FLOAT DEFAULT 0,
+   , WS   USG_percent FLOAT DEFAULT 0,
       blanl FLOAT DEFAULT 0,
       OWS FLOAT DEFAULT 0,
       DWS FLOAT DEFAULT 0,
@@ -257,7 +257,6 @@ def populatePlayerStatsData():
             if not math.isnan(row["PTS"]):
                 PTS = row["PTS"]
             c.execute("INSERT into PlayerStats VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [row["Player"], row["Year"], row["Tm"], row["Pos"], row["Age"], G, GS, MP, PER, TS_percent, PAr3, FTr, ORB_percent, DRB_percent, TRB_percent, AST_percent, STL_percent, BLK_percent, TOV_percent, USG_percent, blanl, OWS, DWS, WS, WS_divide_48, blank2, OBPM, DBPM, BPM, VORP, FG, FGA, FG_percent, P3, PA3, P3_percent, P2, P2A, P2_percent, eFG_percent, FT, FTA, FT_percent, ORB, DRB, TRB, AST, STL, BLK, TOV, PF, PTS])
-            # c.execute("INSERT into PlayerStats VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", [row["Player"], row["Year"], row["Tm"], row["Pos"], row["Age"], row["G"], row["GS"], row["MP"], row["PER"], row["TS%"], row["3PAr"], row["FTr"], row["ORB%"], row["DRB%"], row["TRB%"], row["AST%"], row["STL%"], row["BLK%"], row["TOV%"], row["USG%"], row["blanl"], row["OWS"], row["DWS"], row["WS"], row["WS/48"], row["blank2"], row["OBPM"], row["DBPM"], row["BPM"], row["VORP"], row["FG"], row["FGA"], row["FG%"], row["3P"], row["3PA"], row["3P%"], row["2P"], row["2PA"], row["2P%"], row["eFG%"], row["FT"], row["FTA"], row["FT%"], row["ORB"], row["DRB"], row["TRB"], row["AST"], row["STL"], row["BLK"], row["TOV"], row["PF"], row["PTS"]])
             print(counter)
         print("-----------------")
         print("c= {}".format(counter))
@@ -272,6 +271,27 @@ def insertIntoPlayerStats():
     finally:
         c.close()
 
+def getPlayersFrom_Specific_Year(teamID, year):
+    c = connection.cursor()
+    try:
+        c.execute("SELECT Player.name, PlayerStats.pos, Player.height, Player.weight, Player.born, Player.birthCity, Player.birthState, Player.collage from PlayerStats JOIN Player ON PlayerStats.name = Player.name WHERE PlayerStats.teamID=%s AND PlayerStats.year=%s", [teamID, year])
+        playerNames = c.fetchall()
+        print("Fetched player names that played in {} for {}".format(year, teamID))
+        return playerNames
+    finally:
+        c.close()
+
+
+def getPlayer_Stats_From_Specific_Year_For_Specific_team(teamID, year, playerName):
+    c = connection.cursor()
+    try:
+        c.execute("SELECT G, PTS, AST, FG, FG_percent, FT, FT_percent, eFG_percent from PlayerStats WHERE name=%s AND year=%s AND teamID=%s", [playerName, year, teamID])
+        playerStats = c.fetchall()
+        print("Fetched stats for {} who played in {} for {}".format(playerName, year, teamID))
+        return playerStats
+    finally:
+        c.close()
+
 def getSomePlayerStats():
     c = connection.cursor()
     try:
@@ -279,5 +299,63 @@ def getSomePlayerStats():
         stats = c.fetchall()
         print(stats)
         return stats
+    finally:
+        c.close()
+
+
+def createWhereCondition(attributes):
+    """
+    Creates the where portion of filtering conditions.
+    (So far, can only be used reliably for PlayerStats,
+     but, it should work for most tables.)
+
+    :param attributes: dict
+    :return: str
+
+    NEEDS AGGREGATION
+    """
+    where = ""
+    if len(attributes):
+        for key, value in attributes:
+            '''
+            # THIS CODE IS IGNORED FOR NOW. EVENTUALLY WE WILL WANT MORE FUNCTIONALITY.
+            if key.endswith("_greater"):
+                key = key.strip("_greater")
+                # probably need error checking here
+                where += key + " >= " + value + ", "
+            elif key.endswith("_less"):
+                key = key.strip("_less")
+                # probably need error checking here
+                where += key + " < " + value + ", "
+            elif key in ("name", "teamID", "pos"):
+                where += key + " == '" + value + "', "
+            else:
+                where += key + " == " + value + ", "
+            '''
+            if key == "Pos":
+                values = value.split("-")
+                if len(values) == 2:
+                    where += "(Pos == '" + values[0] + "' OR Pos == '" + values[1] + \
+                             "' OR Pos == '" + value + "') AND "
+                if len(values) == 1:
+                    where += "Pos == '" + values[0] + "' AND "
+            elif key in ("name", "teamID"):
+                where += key + " == '" + value + "' AND "
+            else:
+                where += key + " < " + value + " AND "
+
+        where = where[:-5] + ";"
+        return where
+
+def filterPlayers(attributes):
+    c = connection.cursor()
+    try:
+        where = createWhereCondition(attributes)
+        if where is None:
+            rows = c.execute("SELECT * from PlayerStats;")
+        else:
+            rows = c.execute("SELECT * from PlayerStats WHERE " + where)
+        rows = c.fetchall()
+        return rows
     finally:
         c.close()

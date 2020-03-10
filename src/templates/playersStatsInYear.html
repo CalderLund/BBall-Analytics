@@ -1,0 +1,28 @@
+<h1>Basketball Analytics!</h1>
+
+<button><a href="/">Go Back To Home Page</a></button>
+
+<button style="margin-bottom: 20px"><a href="/team/{{tmId}}/{{tmName}}/{{year}}">Go back to view Performance Summary of {{tmName}} in {{year}}</a></button>
+
+<p>Players that played for <strong>{{tmName}}</strong> in the year <strong>{{year}}</strong></p>
+
+<table style="border: 1px solid black">
+    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Name</th>
+    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Position</th>
+    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Height</th>
+    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Weight</th>
+    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Born</th>
+    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Birth Place</th>
+    <th style="text-align: left; border-bottom: 1px solid black">College</th>
+    {% for stats in player_stats %}
+        <tr>
+            <td style="text-align: left; border-right: 1px solid black"><a href="/player_stats/{{tmId}}/{{tmName}}/{{year}}/{{stats.0}}">{{stats.0}}</a></td>
+            <td style="text-align: left; border-right: 1px solid black">{{stats.1}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{stats.2}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{stats.3}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{stats.4}}</td>
+            <td style="text-align: left; border-right: 1px solid black">{{stats.5}} {{stats.6}}</td>
+            <td style="text-align: left">{{stats.7}}</td>
+        </tr>
+    {% endfor %}
+</table>
