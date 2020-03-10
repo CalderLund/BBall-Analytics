@@ -22,24 +22,17 @@ def playerSetup(request):
     print("Player View's playerSetup() function called.")
     return redirect("/")
 
-def playerFiltering(request, json):
-    """
-    I don't know how you will deal with spaces.
+def topplayers_view(request):
 
-    Example json:
-    ?json={pos:SG,year_greater:2000,year_less:2010,FG_percent_greater:0.5,STL_percent_less:1.5}
+    if request.method == "POST":
+        print(request.POST)
+        query_result = filterPlayers(request.POST)
+        return render(request, "player_select_result.html", {"query_result": query_result})
 
-    I process it to return a
-    """
-    # convert to dictionary
-    vals = dict(json)
+    return render(request, "topplayers.html")
 
-    # do stuff to filter players in players/models.py using vals
-    # return query_result
-    query_result = filterPlayers(vals)
-
-    return render(request, "topplayers.html", {"query_result": query_result})
-
+def player_select_result_view(request):
+    return render(request, "player_select_result.html")
 
 def playerInfo_view(request, tmId, tmName, year):
     player_stats = getPlayersFrom_Specific_Year(tmId, year)
@@ -62,4 +55,3 @@ def playerInfo_view(request, tmId, tmName, year):
 def playerStats_view(request, tmId, tmName, year, playerName):
     player_stats = getPlayer_Stats_From_Specific_Year_For_Specific_team(tmId, year, playerName)
     return render(request, "playerInfoFromAYear.html", {"tmId": tmId, "tmName": tmName, "year": year, "playerName": playerName, "player_stats": player_stats})
-
