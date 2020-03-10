@@ -1,0 +1,53 @@
+Fetched all years for team CHS
+1946
+1947
+1948
+1949
+
+Fetched team info for CHS from 1946
+1
+39
+22
+61
+22
+9
+17
+13
+0
+0
+
+Player table created.
+
+Player Table Dropped!
+
+Deleted All rows from Player
+
+PlayerStats table created.
+
+PlayerStats Table Dropped!
+
+Inserted one row in PlayerStats
+
+Fetched player names that played in 2010 for BOS
+Michael Finley	SF	201	97	1973	Melrose Park, Illinois	University of Wisconsin
+Kevin Garnett	PF	211	108	1976	Mauldin, South Carolina	NaN
+Rasheed Wallace	C	208	102	1974	Philadelphia, Pennsylvania	University of North Carolina
+Ray Allen	SG	203	99	1965	Milton, Florida	Florida State University
+Paul Pierce	SF	201	106	1977	Oakland, California	University of Kansas
+Eddie House	PG	185	81	1978	Berkeley, California	Arizona State University
+Brian Scalabrine	PF	206	109	1978	Long Beach, California	University of Southern California
+Marquis Daniels	SF	198	90	1981	Jasper, Florida	Auburn University
+Kendrick Perkins	C	208	122	1984	Nederland, Texas	NaN
+Tony Allen	SG	193	96	1982	Chicago, Illinois	Oklahoma State University
+Nate Robinson	PG	175	81	1984	Seattle, Washington	University of Washington
+Rajon Rondo	PG	185	84	1986	Louisville, Kentucky	University of Kentucky
+Shelden Williams	PF	185	91	1975	Bronx, New York	University of North Carolina
+Glen Davis	PF	206	131	1986	Baton Rouge, Louisiana	Louisiana State University
+J.R. Giddens	SF	216	115	1985	N/A	NaN
+Henry Walker	SF	196	83	1984	N/A	NaN
+Lester Hudson	PG	190	86	1984	Memphis, Tennessee	University of Tennessee at Martin
+Oliver Lafayette	SG	188	86	1984	Baton Rouge, Louisiana	University of Houston
+Marcus Landry	SF	201	104	1985	Milwaukee, Wisconsin	University of Wisconsin
+
+Fetched stats for Michael Finley who played in 2010 for BOS
+21	109	24	44.0	0.506	2	0.333	0.615
