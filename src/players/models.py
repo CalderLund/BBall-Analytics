@@ -316,7 +316,7 @@ def createWhereCondition(attributes):
     """
     where = ""
     if len(attributes):
-        for key, value in attributes:
+        for key, value in attributes.items():
             '''
             # THIS CODE IS IGNORED FOR NOW. EVENTUALLY WE WILL WANT MORE FUNCTIONALITY.
             if key.endswith("_greater"):

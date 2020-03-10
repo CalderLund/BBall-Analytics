@@ -26,8 +26,8 @@ def topplayers_view(request):
 
     if request.method == "POST":
         print(request.POST)
-        query_result = filterPlayers(vals)
-        return render(request, "topplayers.html", {"query_result": query_result})
+        query_result = filterPlayers(request.POST)
+        return render(request, "player_select_result.html", {"query_result": query_result})
 
     return render(request, "topplayers.html")
 
