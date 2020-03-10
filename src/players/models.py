@@ -311,10 +311,14 @@ def createWhereCondition(attributes):
 
     :param attributes: dict
     :return: str
+
+    NEEDS AGGREGATION
     """
     where = ""
     if len(attributes):
         for key, value in attributes:
+            '''
+            # THIS CODE IS IGNORED FOR NOW. EVENTUALLY WE WILL WANT MORE FUNCTIONALITY.
             if key.endswith("_greater"):
                 key = key.strip("_greater")
                 # probably need error checking here
@@ -327,8 +331,20 @@ def createWhereCondition(attributes):
                 where += key + " == '" + value + "', "
             else:
                 where += key + " == " + value + ", "
+            '''
+            if key == "Pos":
+                values = value.split("-")
+                if len(values) == 2:
+                    where += "(Pos == '" + values[0] + "' OR Pos == '" + values[1] + \
+                             "' OR Pos == '" + value + "') AND "
+                if len(values) == 1:
+                    where += "Pos == '" + values[0] + "' AND "
+            elif key in ("name", "teamID"):
+                where += key + " == '" + value + "' AND "
+            else:
+                where += key + " < " + value + " AND "
 
-        where = where[:-2] + ";"
+        where = where[:-5] + ";"
         return where
 
 def filterPlayers(attributes):
