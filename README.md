@@ -32,7 +32,7 @@ You can find test-sample.sql and test-sample.output under /sql
 ### Features implemented so far (We used Django to implement a simple Database-Driven Application):
   1. That displays all unique basketball teams that have played since the 1930's
   2. That takes year as a user input and displays all basketball teams that played in that particular year. User Input comes through a drop-down menu of years
-  3. Click on a team to see what years the team played in. This displays all years the team has played in. Then select a year which will then display the selected team's performance summary for that year. You may then click the button to display all players who played for this team in the selected year. (NOTE: List of players may be missing for some of the earlier years ex: 1930's '40's etc.) Finally, you can click on each of the users to view their stats for the selected team in the selected year.
+  3. Click on a team to see all years the team played in. Then select a year which will then display the selected team's performance summary for that year. You may then click the button to display all players who played for this team in the selected year. (NOTE: List of players may be missing for some of the earlier years ex: 1930's '40's etc.) Finally, you can click on each of the users to view their stats for the selected team in the selected year.
   4. The view 36 min caculates the average data(include, PER, TS%, offensive rating, defensive rating, rebound rate, game
 score, etc) in a period of 36 min. This advanced metrix is very helpful when interpreting given data for each player and team. 
 
