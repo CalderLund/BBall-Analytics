@@ -28,6 +28,8 @@ You can find test-sample.sql and test-sample.output under /sql
   2. For code that uses pandas to scrape real data from csv files to populate the tables "TeamsInfo", "TeamStats", "Player" and "PlayerStats"
 ### url for data found in: 
   (https://www.kaggle.com/drgilermo/nba-players-stats?fbclid=IwAR3Ch4TslrxGwKE4iaEBuwidrFVzsQ6oY4oQMJu_X5xjo__5svRcowjyHgo) - and (https://www.kaggle.com/open-source-sports/mens-professional-basketball) - we have csv's in github already
+  
+### test-production.sql and test-production.out found under /sql directory
 
 ### Features implemented so far (We used Django to implement a simple Database-Driven Application):
   1. That displays all unique basketball teams that have played since the 1930's
