@@ -43,7 +43,7 @@ score, etc) in a period of 36 min. This advanced metrix is very helpful when int
   1. /src/teams/models.py 
   2. /src/teams/views.py
   3. /src/players/models.py
-  4. /src/players/views.py  directory
+  4. /src/players/views.py
   
-  
+  test-production.sql and test-production.out can be found under sql/
   
