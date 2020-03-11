@@ -32,7 +32,6 @@ def topplayers_view(request):
         query_result = filterPlayers(input_value)
         input_value.pop('start_year', None)
         input_value.pop('end_year', None)
-        print(len(query_result[0]))
         print(query_result)
 
         return render(request, "player_select_result.html", {"query_result": query_result,

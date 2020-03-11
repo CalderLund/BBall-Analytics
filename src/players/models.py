@@ -332,6 +332,8 @@ def createWhereCondition(attributes):
             else:
                 where += key + " == " + value + ", "
             '''
+            if key.endswith('%'):
+                key = key[:-1] + '_percent'
             if key == "Pos":
                 values = value.split("-")
                 if len(values) == 2:
