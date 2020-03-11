@@ -37,6 +37,7 @@ You can find test-sample.sql and test-sample.output under /sql
   3. Click on a team to see all years the team played in. Then select a year which will then display the selected team's performance summary for that year. You may then click the button to display all players who played for this team in the selected year. (NOTE: List of players may be missing for some of the earlier years ex: 1930's '40's etc.) Finally, you can click on any of the players to view their stats when they played for the selected team in the selected year.
   4. The view 36 min caculates the average data(include, PER, TS%, offensive rating, defensive rating, rebound rate, game
 score, etc) in a period of 36 min. This advanced metrix is very helpful when interpreting given data for each player and team. 
+  5. Player filter: Allow user to check the season statistics for players that satisfy the user's input. For example, user may search for players who played from 2000 to 2010 as a shooting guard and had a score rate more than 65%.
 
 ### Relevant source code can be found under:
   1. /src/teams/models.py 
