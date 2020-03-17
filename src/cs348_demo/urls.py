@@ -18,6 +18,7 @@ from django.urls import path
 
 from teams.views import home_view, teamsInYear_view, yearsOfATeam_view, teamInfoInYear_view
 from players.views import playerSetup, playerInfo_view, playerStats_view, topplayers_view, player_select_result_view
+from accounts.views import accountSetup, create_account_view
 
 
 urlpatterns = [
@@ -34,4 +35,6 @@ urlpatterns = [
     path("team/<str:tmId>/<str:tmName>/<int:year>/", teamInfoInYear_view),
     path("player_stats/<str:tmId>/<str:tmName>/<int:year>/", playerInfo_view),
     path("player_stats/<str:tmId>/<str:tmName>/<int:year>/<str:playerName>/", playerStats_view),
+    path("accounts/", accountSetup),
+    path("accounts/create", create_account_view),
 ]
