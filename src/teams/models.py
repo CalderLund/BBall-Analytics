@@ -163,6 +163,12 @@ def createTeamStats():
     finally:
         c.close()
 
+def printTeams(teamsInfo):
+    for team in teamsInfo:
+        print("<option value=\"{} {}\">".format(team[0], team[1]))
+        # print(team[1])
+
+
 def getGuestbookRows():
     # print(connection.cursor)
     c = connection.cursor()
@@ -170,6 +176,7 @@ def getGuestbookRows():
         rows = c.execute("SELECT * from TeamInfo")
         rows = c.fetchall()
         # print(rows)
+        # printTeams(rows)
         return rows
     finally:
         c.close()

@@ -1,11 +1,11 @@
 <h1>Create An Account</h1>
 
-<button style="margin-bottom: 40px;"><a href="/">Go Back To Home Page</a></button>
+<button style="margin-bottom: 20px;"><a href="/">Go Back To Home Page</a></button>
 
 <form action='#' method='POST'>{% csrf_token %}
     <input type="text" name="username" id="username" placeholder="Username" style="margin-bottom: 10px;">
     <br>
-    <input type="text" name="password" id="password" placeholder="password" style="margin-bottom: 10px;">
+    <input type="password" name="password" id="password" placeholder="password" style="margin-bottom: 10px;">
     <br>
     <input type="submit" value="Create Account">
 </form>
