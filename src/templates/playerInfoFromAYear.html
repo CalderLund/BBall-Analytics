@@ -10,23 +10,30 @@
 
 <table style="border: 1px solid black">
     <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">G</th>
-    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">PTS</th>
-    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">AST</th>
-    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FG</th>
-    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FG%</th>
-    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FT</th>
-    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">FT%</th>
-    <th style="text-align: left; border-bottom: 1px solid black">eFG%</th>
+    <th style="text-align: left; border-bottom: 1px solid black">PTS</th>
+    <th style="text-align: left; border-bottom: 1px solid black">AST</th>
+    <th style="text-align: left; border-bottom: 1px solid black">TRB</th>
+    <th style="text-align: left; border-bottom: 1px solid black">STL</th>
+    <th style="text-align: left; border-bottom: 1px solid black">BLK</th>
+    <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">TOV</th>
+    <th style="text-align: left; border-bottom: 1px solid black">FG%</th>
+    <th style="text-align: left; border-bottom: 1px solid black">3PT%</th>
+    <th style="text-align: left; border-bottom: 1px solid black">FT%</th>
+    <th style="text-align: left; border-bottom: 1px solid black">eFT%</th>
     {% for stats in player_stats %}
-        <tr>
-            <td style="text-align: left; border-right: 1px solid black">{{stats.0}}</td>
-            <td style="text-align: left; border-right: 1px solid black">{{stats.1}}</td>
-            <td style="text-align: left; border-right: 1px solid black">{{stats.2}}</td>
-            <td style="text-align: left; border-right: 1px solid black">{{stats.3}}</td>
-            <td style="text-align: left; border-right: 1px solid black">{{stats.4}}</td>
-            <td style="text-align: left; border-right: 1px solid black">{{stats.5}}</td>
-            <td style="text-align: left; border-right: 1px solid black">{{stats.6}}</td>
-            <td style="text-align: left">{{stats.7}}</td>
-        </tr>
+    <tr>
+        <th style="text-align: left; border-right: 1px solid black">{{stats.0}}</td>
+        <th style="text-align: left">{{stats.1}}</td>
+        <th style="text-align: left">{{stats.2}}</td>
+        <th style="text-align: left">{{stats.3}}</td>
+        <th style="text-align: left">{{stats.4}}</td>
+        <th style="text-align: left">{{stats.5}}</td>
+        <th style="text-align: left; border-right: 1px solid black">{{stats.6}}</td>
+        <th style="text-align: left">{{stats.7}}</td>
+        <th style="text-align: left">{{stats.8}}</td>
+        <th style="text-align: left">{{stats.9}}</td>
+        <th style="text-align: left">{{stats.10}}</td>
+
+    </tr>
     {% endfor %}
 </table>

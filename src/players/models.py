@@ -285,8 +285,17 @@ def getPlayersFrom_Specific_Year(teamID, year):
 def getPlayer_Stats_From_Specific_Year_For_Specific_team(teamID, year, playerName):
     c = connection.cursor()
     try:
-        c.execute("SELECT G, PTS, AST, FG, FG_percent, FT, FT_percent, eFG_percent from PlayerStats WHERE name=%s AND year=%s AND teamID=%s", [playerName, year, teamID])
+        c.execute("SELECT G, PTS, AST, TRB, STL, BLK, TOV, FG_percent, P3_percent, FT_percent, eFG_percent from PlayerStats WHERE name=%s AND year=%s AND teamID=%s", [playerName, year, teamID])
         playerStats = c.fetchall()
+
+        modified = []
+        for i in range(len(playerStats[0])):
+            if i in range(1, 7):
+                modified.append(round(playerStats[0][i]/playerStats[0][0], 1))
+            else:
+                modified.append(playerStats[0][i])
+        playerStats = [tuple(modified)]
+
         print("Fetched stats for {} who played in {} for {}".format(playerName, year, teamID))
         return playerStats
     finally:
