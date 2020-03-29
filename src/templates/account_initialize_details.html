@@ -167,7 +167,10 @@
         <option value="WAR Warren Penns">
         <option value="WHT Whiting Ciesar All-Americans">
     </datalist>
-    <input type="submit" id="submit_form" value="Submit">
+    <br>
+    Who's your favourite player? <input type="text" name="player" id="favourite_player" placeholder="Kobe Bryant" value="Kobe Bryant" style="margin-top: 10px;">
+    <br>
+    <input type="submit" id="submit_form" value="Submit" style="margin-top: 10px;">
 </form>
 
 <script>
@@ -176,5 +179,12 @@
         document.getElementById("favourite_team").value = document.getElementById("favourite_team").value.slice(0, 3)
         console.log("JS SCRIPT" + document.getElementById("favourite_team").value)
         // alert(document.getElementById("favourite_team").value)
+        selected_favourite_player_array = document.getElementById("favourite_player").value.split(" ")
+        selected_favourite_player_array.forEach((value, index, arr) => {
+            arr[index] = value.charAt(0).toUpperCase() + value.substring(1)
+        })
+        selected_favourite_player = selected_favourite_player_array.join(" ")
+        console.log("Favourite player after conditioning: " + selected_favourite_player)
+        document.getElementById("favourite_player").value = selected_favourite_player
     }
 </script>

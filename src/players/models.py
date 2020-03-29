@@ -292,6 +292,23 @@ def getPlayer_Stats_From_Specific_Year_For_Specific_team(teamID, year, playerNam
     finally:
         c.close()
 
+def create_PlayerName_Year_index():
+    c = connection.cursor()
+    try:
+        c.execute("CREATE INDEX idx_playerName_year ON PlayerStats(name, year)")
+        print("Created index on PlayerStats(name, year)")
+    finally:
+        c.close()
+
+def get_all_yearsAndTeam_a_player_played_for(playerName):
+    c = connection.cursor()
+    try:
+        c.execute("select year, R.teamID, TeamInfo.team_name from (select year, teamID from PlayerStats WHERE name=%s) AS R JOIN TeamInfo ON R.teamID=TeamInfo.team_id", [playerName])
+        years = c.fetchall()
+        return years
+    finally:
+        c.close()
+
 def getSomePlayerStats():
     c = connection.cursor()
     try:

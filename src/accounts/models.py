@@ -119,16 +119,6 @@ def getAllFavouriteTeamRows():
     finally:
         c.close()
 
-def getAllUsers_And_Their_FavouriteTeams():
-    c = connection.cursor()
-    try:
-        c.execute("SELECT Account.uid, username, team_id, TeamInfo.team_name from (FavouriteTeam NATURAL JOIN Account) NATURAL JOIN TeamInfo")
-        users_favouriteTeams = c.fetchall()
-        print("Fetched all users and their favourite teams from FavouriteTeam, Account & TeamInfo")
-        return users_favouriteTeams
-    finally:
-        c.close()
-
 def get_A_Given_Users_FavouriteTeam(uid):
     c = connection.cursor()
     try:
@@ -136,5 +126,58 @@ def get_A_Given_Users_FavouriteTeam(uid):
         favouriteTeam = c.fetchall()
         print("Fetched user's favourite team")
         return favouriteTeam
+    finally:
+        c.close()
+
+
+def createFavouritePlayerTable():
+    createFavouritePlayerTableString = """
+    CREATE TABLE FavouritePlayer
+    (
+        name VARCHAR(100) NOT NULL,
+        uid INT NOT NULL,
+        FOREIGN KEY(name) REFERENCES Player(name) ON DELETE CASCADE,
+        FOREIGN KEY(uid) REFERENCES Account(uid) ON DELETE CASCADE,
+        PRIMARY KEY(name, uid)
+    )
+    """
+    c = connection.cursor()
+    try:
+        c.execute(createFavouritePlayerTableString)
+        print("FavouritePlayer table created.")
+    finally:
+        c.close()
+
+def dropTableFavouritePlayer():
+    c = connection.cursor()
+    try:
+        c.execute("DROP TABLE FavouritePlayer")
+        print("FavouritePlayer Table Dropped!")
+    finally:
+        c.close()
+
+def deleteAllRowsFromFavouritePlayer():
+    c = connection.cursor()
+    try:
+        c.execute("DELETE from FavouritePlayer")
+        print("Deleted All rows from FavouritePlayer")
+    finally:
+        c.close()
+
+def insertIntoFavouritePlayer(name, uid):
+    c = connection.cursor()
+    try:
+        c.execute("INSERT INTO FavouritePlayer VALUES (%s, %s)", [name, uid])
+        print("Inserted one row into FavouritePlayer")
+    finally:
+        c.close()
+
+def getAllUsers_And_Their_FavouriteTeams():
+    c = connection.cursor()
+    try:
+        c.execute("SELECT Account.uid, username, team_id, TeamInfo.team_name, FavouritePlayer.name from ((FavouriteTeam NATURAL JOIN Account) NATURAL JOIN TeamInfo) NATURAL JOIN FavouritePlayer")
+        users_favouriteTeams = c.fetchall()
+        print("Fetched all users and their favourite teams from FavouriteTeam, Account & TeamInfo")
+        return users_favouriteTeams
     finally:
         c.close()

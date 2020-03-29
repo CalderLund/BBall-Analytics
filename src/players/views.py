@@ -3,7 +3,8 @@ from .models import filterPlayers
 
 from .models import (createPlayerTable, dropTablePlayer, deleteAllRowsFromPlayer, populatePlayerData, getAllPlayers, createPlayerStatsTable,
 dropTablePlayerStats, deleteAllRowsFromPlayerStats, populatePlayerStatsData, insertIntoPlayerStats, getSomePlayerStats, 
-getPlayersFrom_Specific_Year, getPlayer_Stats_From_Specific_Year_For_Specific_team)
+getPlayersFrom_Specific_Year, getPlayer_Stats_From_Specific_Year_For_Specific_team, create_PlayerName_Year_index,
+get_all_yearsAndTeam_a_player_played_for)
 
 # Create your views here.
 
@@ -19,6 +20,7 @@ def playerSetup(request):
     # populatePlayerStatsData()
     # insertIntoPlayerStats()
     # getSomePlayerStats()
+    # create_PlayerName_Year_index()
     print("Player View's playerSetup() function called.")
     return redirect("/")
 
@@ -64,3 +66,9 @@ def playerInfo_view(request, tmId, tmName, year):
 def playerStats_view(request, tmId, tmName, year, playerName):
     player_stats = getPlayer_Stats_From_Specific_Year_For_Specific_team(tmId, year, playerName)
     return render(request, "playerInfoFromAYear.html", {"tmId": tmId, "tmName": tmName, "year": year, "playerName": playerName, "player_stats": player_stats})
+
+def player_years_played_view(request, playerName):
+    # years_teams: list of tuples
+    # each tuple of the form: (year, teamID, team_name)
+    years_teams = get_all_yearsAndTeam_a_player_played_for(playerName)
+    return render(request, "playerYears.html", {"playerName": playerName, "years_teams": years_teams})
