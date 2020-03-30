@@ -3,6 +3,7 @@ from django.db import connection
 
 import pandas as pd
 import math
+from decimal import Decimal
 # Create your models here.
 
 def createPlayerTable():
@@ -343,51 +344,57 @@ def createWhereCondition(attributes):
     where = ""
     if len(attributes):
         for key, value in attributes.items():
-            '''
-            # THIS CODE IS IGNORED FOR NOW. EVENTUALLY WE WILL WANT MORE FUNCTIONALITY.
-            if key.endswith("_greater"):
-                key = key.strip("_greater")
-                # probably need error checking here
-                where += key + " >= " + value + ", "
-            elif key.endswith("_less"):
-                key = key.strip("_less")
-                # probably need error checking here
-                where += key + " < " + value + ", "
-            elif key in ("name", "teamID", "pos"):
-                where += key + " == '" + value + "', "
+            key = key.split("/")  # split on space
+            if len(key) == 1:
+                per = ""
             else:
-                where += key + " == " + value + ", "
-            '''
-            if key.endswith('%'):
-                key = key[:-1] + '_percent'
-            if key == "Pos":
-                values = value.split("-")
-                if len(values) == 2:
-                    where += "(pos = '" + values[0] + "' OR pos = '" + values[1] + \
-                             "' OR pos = '" + value + "') AND "
-                if len(values) == 1:
-                    where += "pos = '" + values[0] + "' AND "
-            elif key in ("name", "teamID"):
-                where += key + " = '" + value + "' AND "
-            elif key == "start_year":
-                where += "year >= " + value + " AND "
-            elif key == "end_year":
-                where += "year <= " + value + " AND "
-            elif key != "csrfmiddlewaretoken":
-                where += key + " > " + value + " AND "
+                per = key[1]
+            key = key[0]
 
-        where = where[:-5] + ";"
+            if key in ("Pos", "name"):
+                where += " " + key + " LIKE '%" + value + "%' "
+            elif key == "start_year":
+                where += " year >= " + value + " "
+            elif key == "end_year":
+                where += " year <= " + value + " "
+            elif per == "G":
+                where += " " + key + " / G::numeric >= " + value + " "
+            elif per == "36":
+                where += " " + key + " / MP::numeric * 36  >= " + value + " "
+            elif key != "csrfmiddlewaretoken":
+                where += " " + key + " >= " + value + " "
+            where += "AND"
+        where = where[:-4] + ";"
         return where
+
+def round_rows(rows):
+    new_rows = []
+    for row in rows:
+        new_entry = []
+        for entry in row:
+            if isinstance(entry, float) or isinstance(entry, Decimal):
+                entry = round(float(entry), 2)
+            new_entry.append(entry)
+        new_rows.append(tuple(new_entry))
+    return new_rows
+
 
 def filterPlayers(attributes):
     c = connection.cursor()
     try:
+        select = """
+        name, year, teamID, pos, age, G, GS, MP / G::numeric, PER, TS_percent,
+        USG_percent, OWS, DWS, WS, OBPM / G::numeric, DBPM / G::numeric, BPM / G::numeric,
+        VORP, FG_percent, P3_percent, P2_percent, eFG_percent, FT_percent, ORB / G::numeric,
+        DRB / G::numeric, TRB / G::numeric, AST / G::numeric, STL / G::numeric,
+        BLK / G::numeric, TOV / G::numeric, PF / G::numeric, PTS / G::numeric"""
         where = createWhereCondition(attributes)
         if where is None:
-            rows = c.execute("SELECT * from PlayerStats;")
+            c.execute("SELECT " + select + " FROM PlayerStats;")
         else:
-            rows = c.execute("SELECT * from PlayerStats WHERE " + where)
+            c.execute("SELECT " + select + " FROM PlayerStats WHERE" + where)
         rows = c.fetchall()
+        rows = round_rows(rows)
         return rows
     finally:
         c.close()
