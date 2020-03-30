@@ -18,7 +18,8 @@ from django.urls import path
 
 from teams.views import home_view, teamsInYear_view, yearsOfATeam_view, teamInfoInYear_view
 from players.views import playerSetup, playerInfo_view, playerStats_view, topplayers_view, player_select_result_view, player_years_played_view
-from accounts.views import accountSetup, create_account_view, all_accounts_view, account_details, already_know_account_details
+from accounts.views import (accountSetup, create_account_view, all_accounts_view, account_details, already_know_account_details,
+                            signIn_view, account_delete_view, account_update_view)
 
 
 urlpatterns = [
@@ -39,4 +40,7 @@ urlpatterns = [
     path("accounts/<int:uid>/<str:username>", account_details),
     path("accounts/<int:uid>/<str:username>/<str:tmId>/<str:tmName>/<str:playerName>", already_know_account_details),
     path("players/<str:playerName>", player_years_played_view),
+    path("accounts/signin/<int:uid>/<str:username>/<str:tmId>/<str:tmName>/<str:playerName>", signIn_view),
+    path("accounts/update/<int:uid>", account_update_view),
+    path("accounts/delete/<int:uid>", account_delete_view),
 ]

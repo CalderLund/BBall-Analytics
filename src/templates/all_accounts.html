@@ -6,13 +6,19 @@
     <tr>
         <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Username</th>
         <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Favourite Team</th>
-        <th style="text-align: left; border-bottom: 1px solid black">Favourite Player</th>
+        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Favourite Player</th>
+        <th style="text-align: left; border-bottom: 1px solid black">Sign In To Update/Delete</th>
+        <!-- <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Update Favourite Team/Player</th>
+        <th style="text-align: left; border-bottom: 1px solid black">Delete Account</th> -->
     </tr>
     {% for favouriteTeam in favouriteTeams %}
         <tr>
             <td style="text-align: left; border-right: 1px solid black;"><a href="/accounts/{{favouriteTeam.0}}/{{favouriteTeam.1}}/{{favouriteTeam.2}}/{{favouriteTeam.3}}/{{favouriteTeam.4}}">{{favouriteTeam.1}}</a></td>
             <td style="text-align: left; border-right: 1px solid black;"><a href="/team/{{favouriteTeam.2}}/{{favouriteTeam.3}}">{{favouriteTeam.3}}</a></td>
-            <td style="text-align: left"><a href="/players/{{favouriteTeam.4}}">{{favouriteTeam.4}}</a></td>
+            <td style="text-align: left; border-right: 1px solid black;"><a href="/players/{{favouriteTeam.4}}">{{favouriteTeam.4}}</a></td>
+            <td style="text-align: left"><a href="/accounts/signin/{{favouriteTeam.0}}/{{favouriteTeam.1}}/{{favouriteTeam.2}}/{{favouriteTeam.3}}/{{favouriteTeam.4}}">Sign In</a></td>
+            <!-- <td style="text-align: left; border-right: 1px solid black;"><a href="/accounts/update/signin/{{favouriteTeam.0}}/{{favouriteTeam.1}}/{{favouriteTeam.2}}/{{favouriteTeam.3}}/{{favouriteTeam.4}}">Update</a></td>
+            <td style="text-align: left"><a href="/accounts/delete/signin/{{favouriteTeam.0}}/{{favouriteTeam.1}}/{{favouriteTeam.2}}/{{favouriteTeam.3}}/{{favouriteTeam.4}}">Delete</a></td> -->
         </tr>
     {% endfor %}
 </table>

@@ -1,9 +1,11 @@
-<h1>Hello {{username}}!</h1>
+<h1>{{username}}, update your account</h1>
 
 <button style="margin-bottom: 20px;"><a href="/">Go Back To Home Page</a></button>
 
-<form action="/accounts/{{uid}}/{{username}}" method="POST">{% csrf_token %}
-    Who's your favourite team? <input list="teams" name="team" id="favourite_team" required>
+<button style="margin-bottom: 20px;"><a href="/accounts/delete/{{uid}}">Delete Your Account</a></button>
+
+<form action="/accounts/update/{{uid}}" method="POST">{% csrf_token %}
+    Update your favourite team? <input list="teams" name="team" placeholder="{{tmId}} {{favouriteTeam}}" id="favourite_team" required>
     <datalist id="teams">
         <option value="BOS Boston Celtics">
         <option value="CHS Chicago Stags">
@@ -168,16 +170,16 @@
         <option value="WHT Whiting Ciesar All-Americans">
     </datalist>
     <br>
-    Who's your favourite player? <input type="text" name="player" id="favourite_player" placeholder="Kobe Bryant" value="Kobe Bryant" style="margin-top: 10px;">
+    Update your favourite player? <input type="text" name="player" id="favourite_player" placeholder="Kobe Bryant" value="{{favouritePlayer}}" style="margin-top: 10px;">
     <br>
     <input type="submit" id="submit_form" value="Submit" style="margin-top: 10px;">
 </form>
 
 <script>
-    document.getElementById("submit_form").onsubmit = setValue
+    document.getElementById("submit_form").onmouseup = setValue
     function setValue() {
-        document.getElementById("favourite_team").value = document.getElementById("favourite_team").value.slice(0, 3)
-        console.log("JS SCRIPT" + document.getElementById("favourite_team").value)
+        // document.getElementById("favourite_team").value = document.getElementById("favourite_team").value.slice(0, 3)
+        // console.log("JS SCRIPT" + document.getElementById("favourite_team").value)
         // alert(document.getElementById("favourite_team").value)
         selected_favourite_player_array = document.getElementById("favourite_player").value.split(" ")
         selected_favourite_player_array.forEach((value, index, arr) => {

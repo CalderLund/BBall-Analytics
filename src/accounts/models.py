@@ -181,3 +181,37 @@ def getAllUsers_And_Their_FavouriteTeams():
         return users_favouriteTeams
     finally:
         c.close()
+
+def get_password_for_uid(uid):
+    c = connection.cursor()
+    try:
+        c.execute("SELECT password from Account WHERE uid=%s", [uid])
+        pswd = c.fetchall()
+        print("Fetched password from Account")
+        return pswd[0][0]
+    finally:
+        c.close()
+
+def deleteAccount(uid):
+    c = connection.cursor()
+    try:
+        c.execute("DELETE from Account WHERE uid=%s", [uid])
+        print("Deleted one row from Account")
+    finally:
+        c.close()
+
+def updateAccount_fav_team(uid, fav_team):
+    c = connection.cursor()
+    try:
+        c.execute("UPDATE FavouriteTeam SET team_id=%s WHERE uid=%s", [fav_team, uid])
+        print("Updated team_id of one row from FavouriteTeam")
+    finally:
+        c.close()
+
+def updateAccount_fav_player(uid, fav_player):
+    c = connection.cursor()
+    try:
+        c.execute("UPDATE FavouritePlayer SET name=%s WHERE uid=%s", [fav_player, uid])
+        print("Updated name of one row from FavouritePlayer")
+    finally:
+        c.close()

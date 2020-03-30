@@ -1,0 +1,13 @@
+<h1>Sign In</h1>
+
+<button style="margin-bottom: 20px;"><a href="/">Go Back To Home Page</a></button>
+
+<button style="margin-left: 20px; margin-bottom: 15px;"><a href="/accounts/all">See All User Accounts</a></button>
+
+<form action='#' method='POST'>{% csrf_token %}
+    Hello <strong>{{username}}</strong>, enter your password to sign in:
+    <br>
+    <input type="password" name="password" id="password" placeholder="password" style="margin-bottom: 10px; margin-top: 10px;">
+    <br>
+    <input type="submit" value="Sign In">
+</form>
