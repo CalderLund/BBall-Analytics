@@ -215,3 +215,82 @@ def updateAccount_fav_player(uid, fav_player):
         print("Updated name of one row from FavouritePlayer")
     finally:
         c.close()
+
+
+# Code for fantasy team
+def createFantasyTeamTable():
+    createFantasyTeamTableString = """
+    CREATE TABLE FantasyTeam
+    (
+        uid INT NOT NULL,
+        fantasy_team_name VARCHAR(50) NOT NULL,
+        FOREIGN KEY(uid) REFERENCES Account(uid) ON DELETE CASCADE,
+        PRIMARY KEY(uid, fantasy_team_name)
+    )
+    """
+    c = connection.cursor()
+    try:
+        c.execute(createFantasyTeamTableString)
+        print("FantasyTeam table created.")
+    finally:
+        c.close()
+
+def insertIntoFantasyTeam(uid, fantasy_team_name):
+    c = connection.cursor()
+    try:
+        c.execute("INSERT INTO FantasyTeam VALUES (%s, %s)", [uid, fantasy_team_name])
+        print("Inserted one row into FantasyTeam")
+    finally:
+        c.close()
+
+def updateFatasyTeam(uid, fantasy_team_name):
+    c = connection.cursor()
+    try:
+        c.execute("UPDATE FantasyTeam SET fantasy_team_name=%s WHERE uid=%s", [fantasy_team_name, uid])
+        print("Updated fantasy_team_name of one row from FantasyTeam")
+    finally:
+        c.close()
+
+def deleteFantasyTeam(uid, fantasy_team_name):
+    c = connection.cursor()
+    try:
+        c.execute("DELETE from Account WHERE uid=%s AND fantasy_team_name=%s", [uid, fantasy_team_name])
+        print("Deleted one row from FantasyTeam")
+    finally:
+        c.close()
+
+def createFantasyIsMemTable():
+    createFantasyIsMemTableString = """
+    CREATE TABLE FantasyIsMem
+    (
+        uid INT NOT NULL,
+        FantasyTeamName VARCHAR(50) NOT NULL,
+        player_name VARCHAR(50) NOT NULL,
+        pos, VARCHAR(50) NOT NULL,
+        FOREIGN KEY(uid, fantasy_team_name) REFERENCES FantasyTeam(uid, fantasy_team_name) ON DELETE CASCADE,
+        FOREIGN KEY(player_name) REFERENCES Player(name) ON DELETE CASCADE,
+        PRIMARY KEY(uid, fantasy_team_name, player_name)
+    )
+    """
+    c = connection.cursor()
+    try:
+        c.execute(createFantasyTeamTableString)
+        print("FantasyTeam table created.")
+    finally:
+        c.close()
+
+def insertIntoFantasyIsMem(uid, fantasy_team_name, player_name, pos):
+    c = connection.cursor()
+    try:
+        c.execute("INSERT INTO FantasyIsMem VALUES (%s, %s, %s, %s)", [uid, fantasy_team_name, player_name, pos])
+        print("Inserted one row into FantasyIsMem")
+    finally:
+        c.close()
+
+def updateFatasyIsMem(uid, fantasy_team_name, player_name, pos):
+    c = connection.cursor()
+    try:
+        c.execute("UPDATE FantasyIsMem SET player_name=%s WHERE uid=%s AND fantasy_team_name=%s AND pos=%s", [player_name, uid, fantasy_team_name, pos])
+        print("Updated one player from FantasyIsMem")
+    finally:
+        c.close()
