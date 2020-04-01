@@ -254,7 +254,7 @@ def updateFatasyTeam(uid, fantasy_team_name):
 def deleteFantasyTeam(uid, fantasy_team_name):
     c = connection.cursor()
     try:
-        c.execute("DELETE from Account WHERE uid=%s AND fantasy_team_name=%s", [uid, fantasy_team_name])
+        c.execute("DELETE from FantasyTeam WHERE uid=%s AND fantasy_team_name=%s", [uid, fantasy_team_name])
         print("Deleted one row from FantasyTeam")
     finally:
         c.close()
