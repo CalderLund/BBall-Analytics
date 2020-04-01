@@ -264,11 +264,11 @@ def createFantasyIsMemTable():
     CREATE TABLE FantasyIsMem
     (
         uid INT NOT NULL,
-        FantasyTeamName VARCHAR(50) NOT NULL,
-        player_name VARCHAR(50) NOT NULL,
-        pos, VARCHAR(50) NOT NULL,
+        fantasy_team_name VARCHAR(50) NOT NULL,
+        name VARCHAR(50) NOT NULL,
+        pos VARCHAR(50) NOT NULL,
         FOREIGN KEY(uid, fantasy_team_name) REFERENCES FantasyTeam(uid, fantasy_team_name) ON DELETE CASCADE,
-        FOREIGN KEY(player_name) REFERENCES Player(name) ON DELETE CASCADE,
+        FOREIGN KEY(name) REFERENCES Player(name) ON DELETE CASCADE,
         PRIMARY KEY(uid, fantasy_team_name, player_name)
     )
     """
@@ -290,7 +290,25 @@ def insertIntoFantasyIsMem(uid, fantasy_team_name, player_name, pos):
 def updateFatasyIsMem(uid, fantasy_team_name, player_name, pos):
     c = connection.cursor()
     try:
-        c.execute("UPDATE FantasyIsMem SET player_name=%s WHERE uid=%s AND fantasy_team_name=%s AND pos=%s", [player_name, uid, fantasy_team_name, pos])
+        c.execute("UPDATE FantasyIsMem SET name=%s WHERE uid=%s AND fantasy_team_name=%s AND pos=%s", [player_name, uid, fantasy_team_name, pos])
         print("Updated one player from FantasyIsMem")
+    finally:
+        c.close()
+
+def getFantasyPlayerStats(uid, fantasy_team_name):
+    c = connection.cursor()
+    try:
+        c.execute('SELECT * From FantasyTeam, FantasyIsMem, Player WHERE uid=%s AND fantasy_team_name=%s', [uid, fantasy_team_name])
+        print("Extract player stats for fantasy team {0} created by user {1}".format(fantasy_team_name, uid))
+        return c.fetchall()
+    finally:
+        c.close()
+
+def getFantasyTeam(uid):
+    c = connection.cursor()
+    try:
+        c.execute('SELECT  From FantasyTeam WHERE uid=%s', [uid])
+        print("Extract Fantasy team info for user {0}".format(uid))
+        return c.fetchall()
     finally:
         c.close()
