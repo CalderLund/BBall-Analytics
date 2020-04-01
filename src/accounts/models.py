@@ -295,15 +295,20 @@ def updateFatasyIsMem(uid, fantasy_team_name, player_name, pos):
     finally:
         c.close()
 
+# Extract season stats for all players for the given uid and fantasy_team_name
 def getFantasyPlayerStats(uid, fantasy_team_name):
     c = connection.cursor()
     try:
-        c.execute('SELECT * From FantasyTeam, FantasyIsMem, Player WHERE uid=%s AND fantasy_team_name=%s', [uid, fantasy_team_name])
+        c.execute('SELECT DISTINCT * From FantasyTeam, FantasyIsMem, Player \
+                   WHERE FantasyTeam.fantasy_team_name = FantasyIsMem.fantasy_team_name AND \
+                         FantasyIsMem.name = Player.name AND \
+                         uid=%s AND fantasy_team_name=%s', [uid, fantasy_team_name])
         print("Extract player stats for fantasy team {0} created by user {1}".format(fantasy_team_name, uid))
         return c.fetchall()
     finally:
         c.close()
 
+# Extract a list of fantasy team name created by a specified user
 def getFantasyTeam(uid):
     c = connection.cursor()
     try:
