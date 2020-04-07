@@ -1,9 +1,23 @@
-<h1>Account Details</h1>
-<button><a href="/">Go Back To Home Page</a></button>
-<button style="margin-left: 20px; margin-bottom: 15px;"><a href="/accounts/all">See All User Accounts</a></button>
-<br>
-<strong>{{username}}</strong>,
-<p>Learn more about your favourite team: <a href="/team/{{tmId}}/{{favouriteTeam}}">{{favouriteTeam}}</a></p>
-<p>Learn more about your favourite player: <a href="/players/{{favouritePlayer}}">{{favouritePlayer}}</a></p>
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Basketball Analytics! - Account Details</span>
+    <div>
+        <button><a href="/">Go Back To Home Page</a></button>
+        <button style="margin-left: 20px; margin-bottom: 15px;"><a href="/accounts/all">See All User Accounts</a>
+        </button>
+    </div>
+</nav>
+
+
+<div class="col-md-6 col-md-offset-3">
+    <strong>{{username}}</strong>,
+    <p>Learn more about your favourite team: <a href="/team/{{tmId}}/{{favouriteTeam}}">{{favouriteTeam}}</a></p>
+    <p>Learn more about your favourite player: <a href="/players/{{favouritePlayer}}">{{favouritePlayer}}</a></p>
+</div>
+
 
 <!-- Update link for learning about favourite player -->
