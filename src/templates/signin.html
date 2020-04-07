@@ -1,13 +1,35 @@
-<h1>Sign In</h1>
+{% load bootstrap4 %}
 
-<button style="margin-bottom: 20px;"><a href="/">Go Back To Home Page</a></button>
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Basketball Analytics!</span>
+    <div>
+        <button style="margin-bottom: 20px;"><a href="/">Go Back To Home Page</a></button>
+        <button style="margin-left: 20px; margin-bottom: 15px;"><a href="/accounts/all">See All User Accounts</a></button>
+    </div>
+</nav>
 
-<button style="margin-left: 20px; margin-bottom: 15px;"><a href="/accounts/all">See All User Accounts</a></button>
+<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+    <div class="card card-signin my-5">
+        <div class="card-body">
+            <h5 class="card-title text-center">Sign In</h5>
+            <form action='#' method='POST'>{% csrf_token %}
+                <label>Hello <strong>{{username}}</strong>, enter your password to sign in:</label>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                </div>
 
-<form action='#' method='POST'>{% csrf_token %}
-    Hello <strong>{{username}}</strong>, enter your password to sign in:
-    <br>
-    <input type="password" name="password" id="password" placeholder="password" style="margin-bottom: 10px; margin-top: 10px;">
-    <br>
-    <input type="submit" value="Sign In">
-</form>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<form action='#' method='POST'>{% csrf_token %}-->
+<!--    Hello <strong>{{username}}</strong>, enter your password to sign in:-->
+<!--    <br>-->
+<!--    <input type="password" name="password" id="password" placeholder="password" style="margin-bottom: 10px; margin-top: 10px;">-->
+<!--    <br>-->
+<!--    <input type="submit" value="Sign In">-->
+<!--</form>-->
