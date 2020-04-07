@@ -1,11 +1,39 @@
-<h1>Create An Account</h1>
+{% load bootstrap4 %}
 
-<button style="margin-bottom: 20px;"><a href="/">Go Back To Home Page</a></button>
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 
-<form action='#' method='POST'>{% csrf_token %}
-    <input type="text" name="username" id="username" placeholder="Username" style="margin-bottom: 10px;">
-    <br>
-    <input type="password" name="password" id="password" placeholder="password" style="margin-bottom: 10px;">
-    <br>
-    <input type="submit" value="Create Account">
-</form>
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Basketball Analytics!</span>
+    <button style="margin-bottom: 20px;"><a href="/">Go Back To Home Page</a></button>
+</nav>
+
+<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+    <div class="card card-signin my-5">
+        <div class="card-body">
+            <h5 class="card-title text-center">Sign Up</h5>
+            <form action='#' method='POST'>{% csrf_token %}
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<!--<form action='#' method='POST'>{% csrf_token %}-->
+<!--    <input type="text" name="username" id="username" placeholder="Username" style="margin-bottom: 10px;">-->
+<!--    <br>-->
+<!--    <input type="password" name="password" id="password" placeholder="password" style="margin-bottom: 10px;">-->
+<!--    <br>-->
+<!--    <input type="submit" value="Create Account">-->
+<!--</form>-->
