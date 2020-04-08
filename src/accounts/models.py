@@ -93,6 +93,8 @@ def insertIntoFavouriteTeam(team_id, uid, yr):
         else:
             c.execute("INSERT INTO FavouriteTeam VALUES (%s, %s, %s)", [team_id, uid, yr])
         print("Inserted one row into FavouriteTeam")
+    except IntegrityError as e:
+        redirect("/accounts/all")
     finally:
         c.close()
 
@@ -172,6 +174,9 @@ def insertIntoFavouritePlayer(name, uid):
     try:
         c.execute("INSERT INTO FavouritePlayer VALUES (%s, %s)", [name, uid])
         print("Inserted one row into FavouritePlayer")
+    except IntegrityError as e:
+        # redirect("/accounts/all")
+        print(e)
     finally:
         c.close()
 
