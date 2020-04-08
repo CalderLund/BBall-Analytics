@@ -1,5 +1,8 @@
 from django.db import models
 from django.db import connection
+from django.db import IntegrityError
+from django.shortcuts import render, redirect
+
 
 # Create your models here.
 
@@ -213,6 +216,8 @@ def updateAccount_fav_player(uid, fav_player):
     try:
         c.execute("UPDATE FavouritePlayer SET name=%s WHERE uid=%s", [fav_player, uid])
         print("Updated name of one row from FavouritePlayer")
+    except IntegrityError as e:
+        redirect("/accounts/all")
     finally:
         c.close()
 
