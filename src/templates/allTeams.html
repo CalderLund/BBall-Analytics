@@ -1,0 +1,24 @@
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand mb-0 h1" href="/">Basketball Analytics!</a>
+</nav>
+
+<div class="container">
+    <table>
+        <tr>
+            <th style="text-align: left">Team ID</th>
+            <th style="text-align: left">Team Name</th>
+        </tr>
+
+        {% for team in teamsInfo %}
+        <tr>
+            <td style="text-align: left">{{team.0}}</td>
+            <td style="text-align: left"><a href="/team/{{team.0}}/{{team.1}}">{{team.1}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

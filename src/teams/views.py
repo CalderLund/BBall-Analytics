@@ -48,3 +48,10 @@ def teamInfoInYear_view(request, tmId, tmName, year):
     print("Team Id: {}".format(tmId))
     print("In Year: {}".format(year))
     return render(request, "teamInfoInYear.html", {"year": year, "teamName": tmName, "tmId": tmId, "teamInfo": teamInfo})
+
+def allTeams_view(request):
+    print("See all teams!")
+    teamsInfo = getGuestbookRows()
+    print(teamsInfo[0][0])
+    return render(request, "allTeams.html",{"teamsInfo":teamsInfo})
+    #return render(request, "allTeams.html")
