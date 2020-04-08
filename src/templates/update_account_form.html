@@ -1,179 +1,198 @@
-<h1>{{username}}, update your account</h1>
+{% load bootstrap4 %}
 
-<button style="margin-bottom: 20px;"><a href="/">Go Back To Home Page</a></button>
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand mb-0 h1" href="/">Basketball Analytics!</a>
+    <button style="margin-bottom: 20px;"><a href="/accounts/delete/{{uid}}">Delete Your Account</a></button>
+</nav>
+<div class="container" style="margin-top: 5%;">
+    <div class="row">
+        <div class="col-sm-4"> </div>
+        <div class="col-md-4">
+            <div class="form-group">
+            <h4 >{{username}}, update your account</h4>
+            </div>
+            <form action="/accounts/update/{{uid}}" method="POST">{% csrf_token %}
+                <div class="form-group">
+                <label>Update your favourite team? </label>
+                <input list="teams" name="team" placeholder="{{tmId}} {{favouriteTeam}}" id="favourite_team" required>
+                <datalist id="teams">
+                    <option value="BOS Boston Celtics">
+                    <option value="CHS Chicago Stags">
+                    <option value="CLR Cleveland Rebels">
+                    <option value="DTF Detroit Falcons">
+                    <option value="NYK New York Knicks">
+                    <option value="PHW Philadelphia Warriors">
+                    <option value="PIT Pittsburgh Ironmen">
+                    <option value="PRO Providence Steamrollers">
+                    <option value="STB St. Louis Bombers">
+                    <option value="TRH Toronto Huskies">
+                    <option value="WSC Washington Capitols">
+                    <option value="BLB Baltimore Bullets">
+                    <option value="FTW Fort Wayne Pistons">
+                    <option value="INJ Indianapolis Jets">
+                    <option value="MNL Minneapolis Lakers">
+                    <option value="ROC Rochester Royals">
+                    <option value="AND Anderson Packers">
+                    <option value="DNN Denver Nuggets">
+                    <option value="INO Indianapolis Olympians">
+                    <option value="SHE Sheboygan Redskins">
+                    <option value="SYR Syracuse Nationals">
+                    <option value="TRI Tri-Cities Blackhawks">
+                    <option value="WAT Waterloo Hawks">
+                    <option value="MLH Milwaukee Hawks">
+                    <option value="STL St. Louis Hawks">
+                    <option value="CIN Cincinnati Royals">
+                    <option value="DET Detroit Pistons">
+                    <option value="LAL Los Angeles Lakers">
+                    <option value="CHP Chicago Packers">
+                    <option value="CHZ Chicago Zephyrs">
+                    <option value="SFW San Francisco Warriors">
+                    <option value="BAL Baltimore Bullets">
+                    <option value="PHI Philadelphia 76ers">
+                    <option value="CHI Chicago Bulls">
+                    <option value="ANA Anaheim Amigos">
+                    <option value="DLC Dallas Chaparrals">
+                    <option value="DNR Denver Rockets">
+                    <option value="HSM Houston Mavericks">
+                    <option value="INA Indiana Pacers">
+                    <option value="KEN Kentucky Colonels">
+                    <option value="MNM Minnesota Muskies">
+                    <option value="NJA New Jersey Americans">
+                    <option value="NOB New Orleans Buccaneers">
+                    <option value="OAK Oakland Oaks">
+                    <option value="PTP Pittsburgh Pipers">
+                    <option value="SDR San Diego Rockets">
+                    <option value="SEA Seattle Supersonics">
+                    <option value="LAS Los Angeles Stars">
+                    <option value="MMF Miami Floridians">
+                    <option value="MNP Minnesota Pipers">
+                    <option value="NYA New York Nets">
+                    <option value="ATL Atlanta Hawks">
+                    <option value="MIL Milwaukee Bucks">
+                    <option value="PHO Phoenix Suns">
+                    <option value="CAR Carolina Cougars">
+                    <option value="WSA Washington Capitols">
+                    <option value="FLO The Floridians">
+                    <option value="MMP Memphis Pros">
+                    <option value="PTC Pittsburgh Condors">
+                    <option value="TEX Texas Chaparrals">
+                    <option value="UTS Utah Stars">
+                    <option value="VIR Virginia Squires">
+                    <option value="BUF Buffalo Braves">
+                    <option value="CLE Cleveland Cavaliers">
+                    <option value="POR Portland Trail Blazers">
+                    <option value="GSW Golden State Warriors">
+                    <option value="HOU Houston Rockets">
+                    <option value="MMT Memphis Tams">
+                    <option value="SDA San Diego Conquistadors">
+                    <option value="KCO KC-Omaha Kings">
+                    <option value="SAA San Antonio Spurs">
+                    <option value="CAP Capital Bullets">
+                    <option value="DNA Denver Nuggets">
+                    <option value="MMS Memphis Sounds">
+                    <option value="SSL Spirits of St. Louis">
+                    <option value="NOJ New Orleans Jazz">
+                    <option value="WSB Washington Bullets">
+                    <option value="SDS San Diego Sails">
+                    <option value="KCK Kansas City Kings">
+                    <option value="DEN Denver Nuggets">
+                    <option value="IND Indiana Pacers">
+                    <option value="NYN New York Nets">
+                    <option value="SAS San Antonio Spurs">
+                    <option value="NJN New Jersey Nets">
+                    <option value="SDC San Diego Clippers">
+                    <option value="UTA Utah Jazz">
+                    <option value="DAL Dallas Mavericks">
+                    <option value="LAC Los Angeles Clippers">
+                    <option value="SAC Sacramento Kings">
+                    <option value="CHH Charlotte Hornets">
+                    <option value="MIA Miami Heat">
+                    <option value="MIN Minnesota Timberwolves">
+                    <option value="ORL Orlando Magic">
+                    <option value="TOR Toronto Raptors">
+                    <option value="VAN Vancouver Grizzlies">
+                    <option value="WAS Washington Wizards">
+                    <option value="MEM Memphis Grizzlies">
+                    <option value="NOH New Orleans Hornets">
+                    <option value="CHA Charlotte Bobcats">
+                    <option value="NOK NO/Oklahoma City Hornets">
+                    <option value="OKC Oklahoma City Thunder">
+                    <option value="CHM Chicago Majors">
+                    <option value="KCS Kansas City Steers">
+                    <option value="LBC Long Beach Chiefs">
+                    <option value="OAO Oakland Oaks">
+                    <option value="PGR Pittsburgh Rens">
+                    <option value="PHT Philadelphia Tapers">
+                    <option value="CLP Cleveland Pipers">
+                    <option value="HAW Hawaii Chiefs">
+                    <option value="LAJ Los Angeles Jets">
+                    <option value="SFS San Francisco Saints">
+                    <option value="WNY Washington/New York Tapers">
+                    <option value="EVA Evansville Agogans">
+                    <option value="GRH Grand Rapids Hornets">
+                    <option value="KCH Kansas City Hi-Spots">
+                    <option value="LOA Louisville Alumnites">
+                    <option value="SPL St. Paul Lights">
+                    <option value="DAY Dayton Rens">
+                    <option value="DTK Detroit Vagabond Kings">
+                    <option value="HCB Hammond Calumet Buccaneers">
+                    <option value="OSH Oshkosh All-Stars">
+                    <option value="FNT Flint/Midland Dow A.C.'s">
+                    <option value="INK Indianapolis Kautskys">
+                    <option value="TOL Toledo Jeeps">
+                    <option value="ATC Atlanta Crackers">
+                    <option value="BIR Birmingham Skyhawks">
+                    <option value="CHG Chicago Gears">
+                    <option value="CHT Chattanooga Majors">
+                    <option value="GRR Grand Rapids Rangers">
+                    <option value="HMV Houston Mavericks">
+                    <option value="KCB Kansas City Blues">
+                    <option value="LOU Louisville Colonels">
+                    <option value="NOL New Orleans Hurricanes">
+                    <option value="OKD Oklahoma City Drillers">
+                    <option value="OMA Omaha Tomahawks">
+                    <option value="SPR Springfield Squires">
+                    <option value="STJ St. Joseph Outlaws">
+                    <option value="STP St. Paul Saints">
+                    <option value="TUL Tulsa Ranchers">
+                    <option value="DTG Detroit Gems">
+                    <option value="YOU Youngstown Bears">
+                    <option value="CAT Cleveland Allmen Transfers">
+                    <option value="PTR Pittsburgh Raiders">
+                    <option value="CCB Cleveland Chase Brassmen">
+                    <option value="CHF Chicago Studebaker Flyers">
+                    <option value="TCH Toledo Jim White Chevrolets">
+                    <option value="AGW Akron Goodyear Wingfoots">
+                    <option value="CHB Chicago Bruins">
+                    <option value="AFS Akron Firestone Non-Skids">
+                    <option value="DTE Detroit Eagles">
+                    <option value="HAM Hammond Ciesar All-Americans">
+                    <option value="CWH Warren Penns/Cleveland White Horses">
+                    <option value="PGP Pittsburgh Pirates">
+                    <option value="BFB Buffalo Bisons">
+                    <option value="CNC Richmond King Clothiers/Cincinnati Comellos">
+                    <option value="COL Columbus Athletic Supply">
+                    <option value="DYM Dayton Metropolitans">
+                    <option value="FWE Fort Wayne General Electrics">
+                    <option value="KNK Kankakee Gallagher Trojans">
+                    <option value="WAR Warren Penns">
+                    <option value="WHT Whiting Ciesar All-Americans">
+                </datalist>
+                </div>
+                <div class="form-group">
+                <label>Update your favourite player?</label>
+                 <input type="text" name="player" id="favourite_player" placeholder="Kobe Bryant" value="{{favouritePlayer}}" style="margin-top: 10px;">
+                </div>
+                <br>
+                <input type="submit" class="btn btn-primary" id="submit_form" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
 
-<button style="margin-bottom: 20px;"><a href="/accounts/delete/{{uid}}">Delete Your Account</a></button>
 
-<form action="/accounts/update/{{uid}}" method="POST">{% csrf_token %}
-    Update your favourite team? <input list="teams" name="team" placeholder="{{tmId}} {{favouriteTeam}}" id="favourite_team" required>
-    <datalist id="teams">
-        <option value="BOS Boston Celtics">
-        <option value="CHS Chicago Stags">
-        <option value="CLR Cleveland Rebels">
-        <option value="DTF Detroit Falcons">
-        <option value="NYK New York Knicks">
-        <option value="PHW Philadelphia Warriors">
-        <option value="PIT Pittsburgh Ironmen">
-        <option value="PRO Providence Steamrollers">
-        <option value="STB St. Louis Bombers">
-        <option value="TRH Toronto Huskies">
-        <option value="WSC Washington Capitols">
-        <option value="BLB Baltimore Bullets">
-        <option value="FTW Fort Wayne Pistons">
-        <option value="INJ Indianapolis Jets">
-        <option value="MNL Minneapolis Lakers">
-        <option value="ROC Rochester Royals">
-        <option value="AND Anderson Packers">
-        <option value="DNN Denver Nuggets">
-        <option value="INO Indianapolis Olympians">
-        <option value="SHE Sheboygan Redskins">
-        <option value="SYR Syracuse Nationals">
-        <option value="TRI Tri-Cities Blackhawks">
-        <option value="WAT Waterloo Hawks">
-        <option value="MLH Milwaukee Hawks">
-        <option value="STL St. Louis Hawks">
-        <option value="CIN Cincinnati Royals">
-        <option value="DET Detroit Pistons">
-        <option value="LAL Los Angeles Lakers">
-        <option value="CHP Chicago Packers">
-        <option value="CHZ Chicago Zephyrs">
-        <option value="SFW San Francisco Warriors">
-        <option value="BAL Baltimore Bullets">
-        <option value="PHI Philadelphia 76ers">
-        <option value="CHI Chicago Bulls">
-        <option value="ANA Anaheim Amigos">
-        <option value="DLC Dallas Chaparrals">
-        <option value="DNR Denver Rockets">
-        <option value="HSM Houston Mavericks">
-        <option value="INA Indiana Pacers">
-        <option value="KEN Kentucky Colonels">
-        <option value="MNM Minnesota Muskies">
-        <option value="NJA New Jersey Americans">
-        <option value="NOB New Orleans Buccaneers">
-        <option value="OAK Oakland Oaks">
-        <option value="PTP Pittsburgh Pipers">
-        <option value="SDR San Diego Rockets">
-        <option value="SEA Seattle Supersonics">
-        <option value="LAS Los Angeles Stars">
-        <option value="MMF Miami Floridians">
-        <option value="MNP Minnesota Pipers">
-        <option value="NYA New York Nets">
-        <option value="ATL Atlanta Hawks">
-        <option value="MIL Milwaukee Bucks">
-        <option value="PHO Phoenix Suns">
-        <option value="CAR Carolina Cougars">
-        <option value="WSA Washington Capitols">
-        <option value="FLO The Floridians">
-        <option value="MMP Memphis Pros">
-        <option value="PTC Pittsburgh Condors">
-        <option value="TEX Texas Chaparrals">
-        <option value="UTS Utah Stars">
-        <option value="VIR Virginia Squires">
-        <option value="BUF Buffalo Braves">
-        <option value="CLE Cleveland Cavaliers">
-        <option value="POR Portland Trail Blazers">
-        <option value="GSW Golden State Warriors">
-        <option value="HOU Houston Rockets">
-        <option value="MMT Memphis Tams">
-        <option value="SDA San Diego Conquistadors">
-        <option value="KCO KC-Omaha Kings">
-        <option value="SAA San Antonio Spurs">
-        <option value="CAP Capital Bullets">
-        <option value="DNA Denver Nuggets">
-        <option value="MMS Memphis Sounds">
-        <option value="SSL Spirits of St. Louis">
-        <option value="NOJ New Orleans Jazz">
-        <option value="WSB Washington Bullets">
-        <option value="SDS San Diego Sails">
-        <option value="KCK Kansas City Kings">
-        <option value="DEN Denver Nuggets">
-        <option value="IND Indiana Pacers">
-        <option value="NYN New York Nets">
-        <option value="SAS San Antonio Spurs">
-        <option value="NJN New Jersey Nets">
-        <option value="SDC San Diego Clippers">
-        <option value="UTA Utah Jazz">
-        <option value="DAL Dallas Mavericks">
-        <option value="LAC Los Angeles Clippers">
-        <option value="SAC Sacramento Kings">
-        <option value="CHH Charlotte Hornets">
-        <option value="MIA Miami Heat">
-        <option value="MIN Minnesota Timberwolves">
-        <option value="ORL Orlando Magic">
-        <option value="TOR Toronto Raptors">
-        <option value="VAN Vancouver Grizzlies">
-        <option value="WAS Washington Wizards">
-        <option value="MEM Memphis Grizzlies">
-        <option value="NOH New Orleans Hornets">
-        <option value="CHA Charlotte Bobcats">
-        <option value="NOK NO/Oklahoma City Hornets">
-        <option value="OKC Oklahoma City Thunder">
-        <option value="CHM Chicago Majors">
-        <option value="KCS Kansas City Steers">
-        <option value="LBC Long Beach Chiefs">
-        <option value="OAO Oakland Oaks">
-        <option value="PGR Pittsburgh Rens">
-        <option value="PHT Philadelphia Tapers">
-        <option value="CLP Cleveland Pipers">
-        <option value="HAW Hawaii Chiefs">
-        <option value="LAJ Los Angeles Jets">
-        <option value="SFS San Francisco Saints">
-        <option value="WNY Washington/New York Tapers">
-        <option value="EVA Evansville Agogans">
-        <option value="GRH Grand Rapids Hornets">
-        <option value="KCH Kansas City Hi-Spots">
-        <option value="LOA Louisville Alumnites">
-        <option value="SPL St. Paul Lights">
-        <option value="DAY Dayton Rens">
-        <option value="DTK Detroit Vagabond Kings">
-        <option value="HCB Hammond Calumet Buccaneers">
-        <option value="OSH Oshkosh All-Stars">
-        <option value="FNT Flint/Midland Dow A.C.'s">
-        <option value="INK Indianapolis Kautskys">
-        <option value="TOL Toledo Jeeps">
-        <option value="ATC Atlanta Crackers">
-        <option value="BIR Birmingham Skyhawks">
-        <option value="CHG Chicago Gears">
-        <option value="CHT Chattanooga Majors">
-        <option value="GRR Grand Rapids Rangers">
-        <option value="HMV Houston Mavericks">
-        <option value="KCB Kansas City Blues">
-        <option value="LOU Louisville Colonels">
-        <option value="NOL New Orleans Hurricanes">
-        <option value="OKD Oklahoma City Drillers">
-        <option value="OMA Omaha Tomahawks">
-        <option value="SPR Springfield Squires">
-        <option value="STJ St. Joseph Outlaws">
-        <option value="STP St. Paul Saints">
-        <option value="TUL Tulsa Ranchers">
-        <option value="DTG Detroit Gems">
-        <option value="YOU Youngstown Bears">
-        <option value="CAT Cleveland Allmen Transfers">
-        <option value="PTR Pittsburgh Raiders">
-        <option value="CCB Cleveland Chase Brassmen">
-        <option value="CHF Chicago Studebaker Flyers">
-        <option value="TCH Toledo Jim White Chevrolets">
-        <option value="AGW Akron Goodyear Wingfoots">
-        <option value="CHB Chicago Bruins">
-        <option value="AFS Akron Firestone Non-Skids">
-        <option value="DTE Detroit Eagles">
-        <option value="HAM Hammond Ciesar All-Americans">
-        <option value="CWH Warren Penns/Cleveland White Horses">
-        <option value="PGP Pittsburgh Pirates">
-        <option value="BFB Buffalo Bisons">
-        <option value="CNC Richmond King Clothiers/Cincinnati Comellos">
-        <option value="COL Columbus Athletic Supply">
-        <option value="DYM Dayton Metropolitans">
-        <option value="FWE Fort Wayne General Electrics">
-        <option value="KNK Kankakee Gallagher Trojans">
-        <option value="WAR Warren Penns">
-        <option value="WHT Whiting Ciesar All-Americans">
-    </datalist>
-    <br>
-    Update your favourite player? <input type="text" name="player" id="favourite_player" placeholder="Kobe Bryant" value="{{favouritePlayer}}" style="margin-top: 10px;">
-    <br>
-    <input type="submit" id="submit_form" value="Submit" style="margin-top: 10px;">
-</form>
 
 <script>
     document.getElementById("submit_form").onmouseup = setValue
