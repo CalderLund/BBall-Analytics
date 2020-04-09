@@ -170,6 +170,19 @@
     <br>
     Who's your favourite player? <input type="text" name="player" id="favourite_player" placeholder="Kobe Bryant" value="Kobe Bryant" style="margin-top: 10px;">
     <br>
+    <br>
+    <div>
+        Would you like to create your customized team?
+        <div>
+            <label for="yes">Yes</label>
+            <input type="radio" name="decision" id="yes" onclick="fantasyTeamWrapper()">
+            <div id="fantasyTeamCreate"></div>
+        </div>
+        <div>
+            <label for="no">No</label>
+            <input type="radio" name="decision" id="no" onclick="removeFantasyTeamCreate()">
+        </div>
+    </div>
     <input type="submit" id="submit_form" value="Submit" style="margin-top: 10px;">
 </form>
 
@@ -186,5 +199,32 @@
         selected_favourite_player = selected_favourite_player_array.join(" ")
         console.log("Favourite player after conditioning: " + selected_favourite_player)
         document.getElementById("favourite_player").value = selected_favourite_player
+    }
+    function teamName() {
+        Teamname_html = 
+        '<label for="teamName">Please enter the name of your team: </label>\
+        <input type="text" name="teamName" id="teamName"> <br />'
+        document.getElementById("fantasyTeamCreate").innerHTML = Teamname_html;
+    }
+    function playerSelect() {
+        playerSelect_html =
+        '<label for="player1">Player 1: </label>\
+         <input type="text" name="player1" id="player1" placeholder="Kobe Bryant" value="Kobe Bryant"> <br />\
+         <label for="player2">Player 2: </label>\
+         <input type="text" name="player2" id="player2" placeholder="LeBron James" value="LeBron James"> <br />\
+         <label for="player3">Player 3: </label>\
+         <input type="text" name="player3" id="player3" placeholder="Michael Jordan" value="Michael Jordan"> <br />\
+         <label for="player4">Player 4: </label>\
+         <input type="text" name="player4" id="player4" placeholder="Kevin Durant" value="Kevin Durant"> <br />\
+         <label for="player5">Player 5: </label>\
+         <input type="text" name="player5" id="player5" placeholder="Kawhi Leonardt" value="Kawhi Leonard">'
+         document.getElementById("fantasyTeamCreate").innerHTML += playerSelect_html;
+    }
+    function fantasyTeamWrapper() {
+        teamName();
+        playerSelect();
+    }
+    function removeFantasyTeamCreate() {
+        document.getElementById("fantasyTeamCreate").innerHTML = "";
     }
 </script>
