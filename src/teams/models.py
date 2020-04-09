@@ -50,11 +50,19 @@ def deleteAllTeamStats():
     finally:
         c.close()
 
-def insertIntoTeamInfo():
+def insertIntoTeamInfo(values = ["pqr", "Test Team 3"]):
     c = connection.cursor()
     try:
-        c.execute("INSERT into TeamInfo VALUES (%s, %s)", ["pqr", "Test Team 3"])
+        c.execute("INSERT into TeamInfo VALUES (%s, %s)", values)
         print("Inserted TeamInfo")
+    finally:
+        c.close()
+
+def updateRowTeamInfo(values = ["pqr", "Test Team 4"]):
+    c = connection.cursor()
+    try:
+        c.execute("UPDATE TeamInfo SET team_name = '" + values[0] + "' WHERE team_name = '" + values[1] + "'")
+        print("Updated TeamInfo")
     finally:
         c.close()
 

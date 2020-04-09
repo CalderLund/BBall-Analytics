@@ -193,6 +193,11 @@
 			},
 
 			{
+				label: "Team",
+				value: "teamID",
+			},
+
+			{
 				label: "Name",
 				value: "name",
 			},
@@ -374,7 +379,7 @@
 		    	for (i = 0; i < value.length ;i++) {
 		    		let attr = value[i];
 		    		let requirement;
-		    		if (attr == 'Pos') {
+		    		if (attr === 'Pos') {
 		    			requirement = '<label for="Pos">Position:</label>\
 		    						   <input list="Pos" name="Pos">\
 		    						   <datalist id="Pos">\
@@ -386,13 +391,48 @@
 									       <option value="G">\
 					                       <option value="F">\
 		    						   </datalist> <br> </br>';
-		    		} else {
-		    			requirement = `<label for=${attr}>${attr}:</label> \
-		    					   	   <input type="number" name=${attr} value=0 step="0.01"> <br> </br>`;
+		    		} else if (attr === 'teamID') {
+						requirement = '<label for="teamID">Team:</label>\
+		    						   <input list="teamID" name="teamID">\
+		    						   <datalist id="teamID">\
+		    						       <option value="Atlanta Hawks">\
+		    						       <option value="Boston Celtics">\
+		    						       <option value="Brooklyn Nets">\
+		    						       <option value="Charlotte Hornets">\
+		    						       <option value="Chicago Bulls">\
+		    						       <option value="Cleveland Cavaliers">\
+		    						       <option value="Dallas Mavericks">\
+		    						       <option value="Denver Nuggets">\
+		    						       <option value="Detroit Pistons">\
+		    						       <option value="Golden State Warriors">\
+		    						       <option value="Houston Rockets">\
+		    						       <option value="Indiana Pacers">\
+		    						       <option value="Los Angeles Clippers">\
+		    						       <option value="Los Angeles Lakers">\
+		    						       <option value="Memphis Grizzlies">\
+		    						       <option value="Miami Heat">\
+		    						       <option value="Milwaukee Bucks">\
+		    						       <option value="Minnesota Timberwolves">\
+		    						       <option value="New Orleans Pelicans">\
+		    						       <option value="New York Knicks">\
+		    						       <option value="Oklahoma City Thunder">\
+		    						       <option value="Orlando Magic">\
+		    						       <option value="Philadelphia 76ers">\
+		    						       <option value="Phoenix Suns">\
+		    						       <option value="Portland Trailblazers">\
+		    						       <option value="Sacramento Kings">\
+		    						       <option value="San Antonio Spurs">\
+		    						       <option value="Toronto Raptors">\
+		    						       <option value="Utah Jazz">\
+		    						       <option value="Washington Wizards">\
+		    						   </datalist> <br> </br>';
+					} else {
+							requirement = `<label for=${attr}>${attr}:</label> \
+		    					   	   <input type="number" name=${attr} value=0 step="0.01"> <br> </br>`
 		    		}
 		    		html_code += requirement;
-					}
-					user_requirement.innerHTML = html_code;
+				}
+				user_requirement.innerHTML = html_code;
 			},
 	        classNames: {
 	          select: "select-pure__select",
