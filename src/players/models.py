@@ -341,7 +341,7 @@ def createWhereCondition(attributes):
 
     NEEDS AGGREGATION
     """
-    where = ""
+    where = " WHERE "
     if len(attributes):
         for key, value in attributes.items():
             key = key.split("/")  # split on space
@@ -353,6 +353,9 @@ def createWhereCondition(attributes):
 
             if key in ("Pos", "name"):
                 where += " " + key + " LIKE '%" + value + "%' "
+            elif key == "teamID":
+                where = ", TeamInfo as t " + where
+                where += " t.team_name LIKE '%" + value + "%' AND t.team_id = teamID "
             elif key == "start_year":
                 where += " year >= " + value + " "
             elif key == "end_year":
@@ -392,7 +395,7 @@ def filterPlayers(attributes):
         if where is None:
             c.execute("SELECT " + select + " FROM PlayerStats;")
         else:
-            c.execute("SELECT " + select + " FROM PlayerStats WHERE" + where)
+            c.execute("SELECT " + select + " FROM PlayerStats" + where)
         rows = c.fetchall()
         rows = round_rows(rows)
         return rows
