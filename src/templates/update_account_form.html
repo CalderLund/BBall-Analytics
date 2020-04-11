@@ -185,6 +185,44 @@
                 <label>Update your favourite player?</label>
                  <input type="text" name="player" id="favourite_player" placeholder="Kobe Bryant" value="{{favouritePlayer}}" style="margin-top: 10px;">
                 </div>
+
+                <div>
+                    {% if fantasyTeam == None%}
+                    <div>
+                        Would you like to create your customized team?
+                        <div>
+                            <label for="yes">Yes</label>
+                            <input type="radio" name="decision" id="yes" onclick="fantasyTeamWrapper()">
+                            <div id="fantasyTeamCreate"></div>
+                        </div>
+                        <div>
+                            <label for="no">No</label>
+                            <input type="radio" name="decision" id="no" onclick="removeFantasyTeamCreate()">
+                        </div>
+                    </div>
+                    {% else %}
+                    <div>
+                        <label for="teamName" style="margin-top: 10px;">Update your team name? </label> <br />
+                        <input type="text" name="teamName" id="teamName" placeholder="{{fantasyTeam}}" value="{{fantasyTeam}}"> <br />
+
+                        <label for="SG" style="margin-top: 10px;">Update your Shooting Guard? </label>
+                        <input type="text" name="SG" id="SG" placeholder="{{fantasyPlayers.SG}}" value="{{fantasyPlayers.SG}}"> <br />
+
+                        <label for="PG" style="margin-top: 10px;">Update your Point Guard? </label>
+                        <input type="text" name="PG" id="PG" placeholder="{{fantasyPlayers.PG}}" value="{{fantasyPlayers.PG}}"> <br />
+
+                        <label for="SF" style="margin-top: 10px;">Update your Small Forward? </label>
+                        <input type="text" name="SF" id="SF" placeholder="{{fantasyPlayers.SF}}" value="{{fantasyPlayers.SF}}"> <br />
+
+                        <label for="PF" style="margin-top: 10px;">Update your Power Forward? </label>
+                        <input type="text" name="PF" id="PF" placeholder="{{fantasyPlayers.PF}}" value="{{fantasyPlayers.PF}}"> <br />
+
+                        <label for="C" style="margin-top: 10px;">Update your Center? </label><br />
+                        <input type="text" name="C" id="C" placeholder="{{fantasyPlayers.C}}" value="{{fantasyPlayers.C}}"> 
+                    </div>
+                    {% endif %}
+                </div>
+
                 <br>
                 <input type="submit" class="btn btn-primary" id="submit_form" value="Submit">
             </form>
@@ -207,5 +245,33 @@
         selected_favourite_player = selected_favourite_player_array.join(" ")
         console.log("Favourite player after conditioning: " + selected_favourite_player)
         document.getElementById("favourite_player").value = selected_favourite_player
+    }
+
+    function teamName() {
+        Teamname_html = 
+        '<label for="teamName">Please enter the name of your team: </label>\
+        <input type="text" name="teamName" id="teamName"> <br />'
+        document.getElementById("fantasyTeamCreate").innerHTML = Teamname_html;
+    }
+    function playerSelect() {
+        playerSelect_html =
+        '<label for="SG">Choose Your Shooting Guard: </label>\
+         <input type="text" name="SG" id="SG" placeholder="Kobe Bryant" value="Kobe Bryant"> <br />\
+         <label for="PG">Choose Your Point Guard: </label>\
+         <input type="text" name="PG" id="PG" placeholder="LeBron James" value="LeBron James"> <br />\
+         <label for="SF">Choose Your Small Forward: </label>\
+         <input type="text" name="SF" id="SF" placeholder="Ozell Jones" value="Ozell Jones"> <br />\
+         <label for="PF">Choose Your Power Forward: </label>\
+         <input type="text" name="PF" id="PF" placeholder="Kevin Durant" value="Kevin Durant"> <br />\
+         <label for="C">Choose Your Center: </label><br />\
+         <input type="text" name="C" id="C" placeholder="Kawhi Leonardt" value="Kawhi Leonard">'
+         document.getElementById("fantasyTeamCreate").innerHTML += playerSelect_html;
+    }
+    function fantasyTeamWrapper() {
+        teamName();
+        playerSelect();
+    }
+    function removeFantasyTeamCreate() {
+        document.getElementById("fantasyTeamCreate").innerHTML = "";
     }
 </script>

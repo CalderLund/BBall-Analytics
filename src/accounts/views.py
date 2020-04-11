@@ -4,7 +4,8 @@ from .models import (createAccountTable, dropTableAccount, deleteAllRowsFromAcco
 createFavouriteTeamTable, insertIntoFavouriteTeam, dropTableFavouriteTeam, deleteAllRowsFromFavouriteTeam, getAllUsers_And_Their_FavouriteTeams,
 get_A_Given_Users_FavouriteTeam, getAllFavouriteTeamRows, createFavouritePlayerTable, dropTableFavouritePlayer, 
 deleteAllRowsFromFavouritePlayer, insertIntoFavouritePlayer, get_password_for_uid, deleteAccount, updateAccount_fav_team,
-updateAccount_fav_player, insertIntoFantasyTeam, createFantasyTeamTable, createFantasyIsMemTable, insertIntoFantasyIsMem, getFantasyPlayers)
+updateAccount_fav_player, insertIntoFantasyTeam, createFantasyTeamTable, createFantasyIsMemTable, insertIntoFantasyIsMem, getFantasyPlayers,
+getFantasyTeam, updateFantasyTeam, updateFantasyIsMem)
 
 # Create your views here.
 
@@ -57,7 +58,7 @@ def account_details(request, uid, username):
         insertIntoFavouritePlayer(favouritePlayer, uid)
         
         # Fantasy Team Code Starts Here
-        fantasy_team_name = None
+        fantasy_team_name = "None"
         fantasyPlayers = None
         if "teamName" in request.POST:
             fantasy_team_name = request.POST["teamName"]
@@ -107,7 +108,14 @@ def signIn_view(request, uid, username, tmId, tmName, playerName):
         pswd = get_password_for_uid(uid)
         print("Password: {}".format(pswd))
         if request.POST["password"] == pswd:
-            return render(request, "update_account_form.html", {"uid": uid, "username": username, "tmId": tmId, "favouriteTeam": tmName, "favouritePlayer": playerName})
+            fantasyTeam = getFantasyTeam(uid)[0][0]
+            fantasyPlayers = None
+            if fantasyTeam is not None:
+                result = getFantasyPlayers(uid)
+                fantasyPlayers = {}
+                for player in result:
+                    fantasyPlayers[player[1]] = player[0]
+            return render(request, "update_account_form.html", {"uid": uid, "username": username, "tmId": tmId, "favouriteTeam": tmName, "favouritePlayer": playerName, "fantasyTeam":fantasyTeam, "fantasyPlayers":fantasyPlayers})
         else:
             return redirect("/accounts/all")
     return render(request, "signin.html", {"uid": uid, "username": username, "tmId": tmId, "favouriteTeam": tmName, "favouritePlayer": playerName})
@@ -120,10 +128,30 @@ def account_update_view(request, uid):
     if request.method == "POST":
         team_name = request.POST["team"]
         team_id = team_name[0:3]
-        print("Team: {}".format(team_name))
-        print("Team ID: {}".format(team_id))
+        # print("Team: {}".format(team_name))
+        # print("Team ID: {}".format(team_id))
         updateAccount_fav_team(uid, team_id)
         updateAccount_fav_player(uid, request.POST["player"])
+        if 'decision' not in request.POST:
+            updateFantasyTeam(uid, request.POST["teamName"])
+            updateFantasyIsMem(uid, request.POST["SG"], "SG")
+            updateFantasyIsMem(uid, request.POST["PG"], "PG")
+            updateFantasyIsMem(uid, request.POST["SF"], "SF")
+            updateFantasyIsMem(uid, request.POST["PF"], "PF")
+            updateFantasyIsMem(uid, request.POST["C"], "C")
+        elif 'teamName' in request.POST:
+            fantasy_team_name = request.POST["teamName"]
+            PG_player_name = request.POST["PG"]
+            SG_player_name = request.POST["SG"]
+            SF_player_name = request.POST["SF"]
+            PF_player_name = request.POST["PF"]
+            C_player_name = request.POST["C"]
+            insertIntoFantasyTeam(uid, fantasy_team_name)
+            insertIntoFantasyIsMem(uid, PG_player_name, "PG")
+            insertIntoFantasyIsMem(uid, SG_player_name, "SG")
+            insertIntoFantasyIsMem(uid, SF_player_name, "SF")
+            insertIntoFantasyIsMem(uid, PF_player_name, "PF")
+            insertIntoFantasyIsMem(uid, C_player_name, "C")
     return redirect("/accounts/all")
 # def update_account_view(request, uid, username, tmId, tmName, playerName):
 #     return render(request, "update_account_form.html", {"uid": uid, "username": username, "tmId": tmId, "favouriteTeam": tmName, "favouritePlayer": playerName})

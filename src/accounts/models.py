@@ -259,7 +259,7 @@ def insertIntoFantasyTeam(uid, fantasy_team_name):
     finally:
         c.close()
 
-def updateFatasyTeam(uid, fantasy_team_name):
+def updateFantasyTeam(uid, fantasy_team_name):
     c = connection.cursor()
     try:
         c.execute("UPDATE FantasyTeam SET fantasy_team_name=%s WHERE uid=%s", [fantasy_team_name, uid])
@@ -302,10 +302,10 @@ def insertIntoFantasyIsMem(uid, player_name, pos):
     finally:
         c.close()
 
-def updateFatasyIsMem(uid, fantasy_team_name, player_name, pos):
+def updateFantasyIsMem(uid, player_name, pos):
     c = connection.cursor()
     try:
-        c.execute("UPDATE FantasyIsMem SET name=%s WHERE uid=%s AND fantasy_team_name=%s AND pos=%s", [player_name, uid, fantasy_team_name, pos])
+        c.execute("UPDATE FantasyIsMem SET name=%s WHERE uid=%s AND pos=%s", [player_name, uid, pos])
         print("Updated one player from FantasyIsMem")
     finally:
         c.close()
@@ -327,7 +327,7 @@ def getFantasyPlayerStats(uid, fantasy_team_name):
 def getFantasyTeam(uid):
     c = connection.cursor()
     try:
-        c.execute('SELECT  From FantasyTeam WHERE uid=%s', [uid])
+        c.execute('SELECT fantasy_team_name From FantasyTeam WHERE uid=%s', [uid])
         print("Extract Fantasy team info for user {0}".format(uid))
         return c.fetchall()
     finally:
