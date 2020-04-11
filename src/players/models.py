@@ -341,8 +341,10 @@ def createWhereCondition(attributes):
 
     NEEDS AGGREGATION
     """
-    where = " WHERE "
+    where = ""
+    orderBy = ""
     if len(attributes):
+        keys = []
         for key, value in attributes.items():
             key = key.split("/")  # split on space
             if len(key) == 1:
@@ -353,21 +355,34 @@ def createWhereCondition(attributes):
 
             if key in ("Pos", "name"):
                 where += " " + key + " LIKE '%" + value + "%' "
+                keys.append(key)
             elif key == "teamID":
                 where = ", TeamInfo as t " + where
                 where += " t.team_name LIKE '%" + value + "%' AND t.team_id = teamID "
+                keys.append(key)
             elif key == "start_year":
                 where += " year >= " + value + " "
             elif key == "end_year":
                 where += " year <= " + value + " "
             elif per == "G":
                 where += " " + key + " / G::numeric >= " + value + " "
+                keys.append(key + " / G::numeric")
             elif per == "36":
                 where += " " + key + " / MP::numeric * 36  >= " + value + " "
-            elif key != "csrfmiddlewaretoken":
+                keys.append(key + " / MP::numeric * 36")
+            elif key != "csrfmiddlewaretoken" and key != "sort":
                 where += " " + key + " >= " + value + " "
+                keys.append(key)
             where += "AND"
-        where = where[:-4] + ";"
+            if key == "sort":
+                where = where[:-3]
+                if value == "TRUE":
+                    orderBy += " ORDER BY "
+        where = where[:-4] + orderBy
+        if orderBy == " ORDER BY ":
+            for key in keys:
+                where += key + "DESC, "
+            where = where[:-2] + ";"
         return where
 
 def round_rows(rows):
@@ -395,7 +410,8 @@ def filterPlayers(attributes):
         if where is None:
             c.execute("SELECT " + select + " FROM PlayerStats;")
         else:
-            c.execute("SELECT " + select + " FROM PlayerStats" + where)
+            print("SELECT " + select + " FROM PlayerStats WHERE " + where)
+            c.execute("SELECT " + select + " FROM PlayerStats WHERE " + where)
         rows = c.fetchall()
         rows = round_rows(rows)
         return rows
