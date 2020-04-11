@@ -20,10 +20,12 @@
 	-->
 </head>
 <body>
+	<br>
 	<h1 align="center">Player Filter</h1>
+	<br>
 	<form id='player_info' action='.' method='POST'>{% csrf_token %}
 		<div class="select-wrapper">
-			<label for="start_year">From:</label>
+			<label for="start_year" style="padding-right: 11px;">From:</label>
 		    <input list="start_year" name="start_year" placeholder="1950" required>
 		    <datalist id="start_year">
 		        <option value="1950">
@@ -94,12 +96,12 @@
 				<option value="2015">
 				<option value="2016">
 				<option value="2017">
-		    </datalist> <br> </br>
+		    </datalist> <br>
 		</div>
 
 		<div class="select-wrapper">
-		    <label for="end_year">To:</label>
-		    <input list="end_year" name="end_year" placeholder="2011" required>
+		    <label for="end_year" style="padding-right: 30px;">To:</label>
+		    <input list="end_year" name="end_year" placeholder="2017" required>
 		    <datalist id="end_year">
 		        <option value="1950">
 		        <option value="1951">
@@ -169,19 +171,23 @@
 				<option value="2015">
 				<option value="2016">
 				<option value="2017">
-		    </datalist> <br> </br>
+		    </datalist> <br> <br>
 		</div>
 
 		<div class="select-wrapper" name="test">
 			<h3>Select Attributes:</h3>
 			<span class="autocomplete-select"></span>
 	      	<!--<button onclick="resetAutocomplete()">Reset</button>-->
-		</div> <br> </br>
-
-		<div class="select-wrapper" id="requirement"></div> <br> </br>
-
-		<div>
-	    	<input style="margin-bottom: 20px; margin-right: 15px; position: relative; left: 400px;" type='submit' value='Submit' />
+		</div>
+		<br>
+		<div class="select-wrapper">
+			<input type="checkbox" id="sort" name="sort" value="FALSE">
+			<label for="sort"> Sort by attributes</label><br>
+		</div>
+		<div class="select-wrapper" id="requirement"></div>
+		<br>
+		<div class="select-wrapper">
+	    	<input style="margin-bottom: 20px; margin-right: 15px; position: relative;" type='submit' value='Submit' />
 	    </div>
 	</form>
 	<script>
@@ -390,7 +396,7 @@
 									       <option value="C">\
 									       <option value="G">\
 					                       <option value="F">\
-		    						   </datalist> <br> </br>';
+		    						   </datalist> <br>';
 		    		} else if (attr === 'teamID') {
 						requirement = '<label for="teamID">Team:</label>\
 		    						   <input list="teamID" name="teamID">\
@@ -425,14 +431,21 @@
 		    						       <option value="Toronto Raptors">\
 		    						       <option value="Utah Jazz">\
 		    						       <option value="Washington Wizards">\
-		    						   </datalist> <br> </br>';
+		    						   </datalist> <br>';
 					} else {
 							requirement = `<label for=${attr}>${attr}:</label> \
-		    					   	   <input type="number" name=${attr} value=0 step="0.01"> <br> </br>`
+		    					   	   <input type="number" name=${attr} value=0 step="0.01"> <br>`
 		    		}
 		    		html_code += requirement;
 				}
 				user_requirement.innerHTML = html_code;
+
+				let sort = document.getElementById('sort');
+				if (sort.checked) {
+					sort.value = "TRUE"
+				} else {
+					sort.value = "FALSE"
+				}
 			},
 	        classNames: {
 	          select: "select-pure__select",
