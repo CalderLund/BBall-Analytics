@@ -172,7 +172,7 @@ def deleteAllRowsFromFavouritePlayer():
 def insertIntoFavouritePlayer(name, uid):
     c = connection.cursor()
     try:
-        c.execute("INSERT INTO FavouritePlayer VALUES (%s, %s)", [name, uid])
+        c.execute("INSERT INTO FavouritePlayer VALUES ((SELECT DISTINCT name FROM Player WHERE name LIKE '%" + str(name) + "%'), " + str(uid) + ")")
         print("Inserted one row into FavouritePlayer")
     except IntegrityError as e:
         # redirect("/accounts/all")
@@ -222,7 +222,7 @@ def updateAccount_fav_team(uid, fav_team):
 def updateAccount_fav_player(uid, fav_player):
     c = connection.cursor()
     try:
-        c.execute("UPDATE FavouritePlayer SET name=%s WHERE uid=%s", [fav_player, uid])
+        c.execute("UPDATE FavouritePlayer SET name=(SELECT DISTINCT name FROM Player WHERE name LIKE '%" + str(fav_player) + "%') WHERE uid=" + str(uid))
         print("Updated name of one row from FavouritePlayer")
     except IntegrityError as e:
         redirect("/accounts/all")
@@ -305,7 +305,7 @@ def insertIntoFantasyIsMem(uid, player_name, pos):
 def updateFantasyIsMem(uid, player_name, pos):
     c = connection.cursor()
     try:
-        c.execute("UPDATE FantasyIsMem SET name=%s WHERE uid=%s AND pos=%s", [player_name, uid, pos])
+        c.execute("UPDATE FantasyIsMem SET name=(SELECT DISTINCT name FROM Player WHERE name LIKE '%" + str(player_name) + "%') WHERE uid=" + str(uid) + " AND pos='" + str(pos) + "'")
         print("Updated one player from FantasyIsMem")
     finally:
         c.close()
@@ -314,10 +314,10 @@ def updateFantasyIsMem(uid, player_name, pos):
 def getFantasyPlayerStats(uid, fantasy_team_name):
     c = connection.cursor()
     try:
-        c.execute('SELECT DISTINCT * From FantasyTeam, FantasyIsMem, Player \
+        c.execute("SELECT DISTINCT * From FantasyTeam, FantasyIsMem, Player \
                    WHERE FantasyTeam.fantasy_team_name = FantasyIsMem.fantasy_team_name AND \
-                         FantasyIsMem.name = Player.name AND \
-                         uid=%s AND fantasy_team_name=%s', [uid, fantasy_team_name])
+                         FantasyIsMem.name LIKE CONCAT('%', Player.name, '%') AND \
+                         uid=" + str(uid) + " AND fantasy_team_name='" + fantasy_team_name + "'")
         print("Extract player stats for fantasy team {0} created by user {1}".format(fantasy_team_name, uid))
         return c.fetchall()
     finally:
