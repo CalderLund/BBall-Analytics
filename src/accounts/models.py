@@ -297,7 +297,7 @@ def createFantasyIsMemTable():
 def insertIntoFantasyIsMem(uid, player_name, pos):
     c = connection.cursor()
     try:
-        c.execute("INSERT INTO FantasyIsMem VALUES (%s, %s, %s)", [uid, player_name, pos])
+        c.execute("INSERT INTO FantasyIsMem VALUES (" + str(uid) + ", (SELECT DISTINCT name FROM Player WHERE name LIKE '%" + str(player_name) + "%'), '" + str(pos) + "')")
         print("Inserted one row into FantasyIsMem")
     finally:
         c.close()
