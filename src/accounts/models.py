@@ -183,7 +183,10 @@ def insertIntoFavouritePlayer(name, uid):
 def getAllUsers_And_Their_FavouriteTeams():
     c = connection.cursor()
     try:
-        c.execute("SELECT Account.uid, username, team_id, TeamInfo.team_name, FavouritePlayer.name from ((FavouriteTeam NATURAL JOIN Account) NATURAL JOIN TeamInfo) NATURAL JOIN FavouritePlayer")
+        c.execute("SELECT Account.uid, username, team_id, TeamInfo.team_name,\
+                   FavouritePlayer.name, FantasyTeam.fantasy_team_name \
+                   from (((FavouriteTeam NATURAL JOIN Account) NATURAL JOIN TeamInfo) \
+                   NATURAL JOIN FavouritePlayer) NATURAL JOIN FantasyTeam")
         users_favouriteTeams = c.fetchall()
         print("Fetched all users and their favourite teams from FavouriteTeam, Account & TeamInfo")
         return users_favouriteTeams
@@ -233,9 +236,9 @@ def createFantasyTeamTable():
     CREATE TABLE FantasyTeam
     (
         uid INT NOT NULL,
-        fantasy_team_name VARCHAR(50) NOT NULL,
+        fantasy_team_name VARCHAR(50),
         FOREIGN KEY(uid) REFERENCES Account(uid) ON DELETE CASCADE,
-        PRIMARY KEY(uid, fantasy_team_name)
+        PRIMARY KEY(uid)
     )
     """
     c = connection.cursor()
@@ -248,7 +251,10 @@ def createFantasyTeamTable():
 def insertIntoFantasyTeam(uid, fantasy_team_name):
     c = connection.cursor()
     try:
-        c.execute("INSERT INTO FantasyTeam VALUES (%s, %s)", [uid, fantasy_team_name])
+        if (fantasy_team_name is None):
+            c.execute("INSERT INTO FantasyTeam VALUES (%s, NULL)", [uid])
+        else:
+            c.execute("INSERT INTO FantasyTeam VALUES (%s, %s)", [uid, fantasy_team_name])
         print("Inserted one row into FantasyTeam")
     finally:
         c.close()
@@ -274,25 +280,24 @@ def createFantasyIsMemTable():
     CREATE TABLE FantasyIsMem
     (
         uid INT NOT NULL,
-        fantasy_team_name VARCHAR(50) NOT NULL,
         name VARCHAR(50) NOT NULL,
         pos VARCHAR(50) NOT NULL,
-        FOREIGN KEY(uid, fantasy_team_name) REFERENCES FantasyTeam(uid, fantasy_team_name) ON DELETE CASCADE,
+        FOREIGN KEY(uid) REFERENCES FantasyTeam(uid) ON DELETE CASCADE,
         FOREIGN KEY(name) REFERENCES Player(name) ON DELETE CASCADE,
-        PRIMARY KEY(uid, fantasy_team_name, player_name)
+        PRIMARY KEY(uid, name)
     )
     """
     c = connection.cursor()
     try:
-        c.execute(createFantasyTeamTableString)
+        c.execute(createFantasyIsMemTableString)
         print("FantasyTeam table created.")
     finally:
         c.close()
 
-def insertIntoFantasyIsMem(uid, fantasy_team_name, player_name, pos):
+def insertIntoFantasyIsMem(uid, player_name, pos):
     c = connection.cursor()
     try:
-        c.execute("INSERT INTO FantasyIsMem VALUES (%s, %s, %s, %s)", [uid, fantasy_team_name, player_name, pos])
+        c.execute("INSERT INTO FantasyIsMem VALUES (%s, %s, %s)", [uid, player_name, pos])
         print("Inserted one row into FantasyIsMem")
     finally:
         c.close()
@@ -325,5 +330,16 @@ def getFantasyTeam(uid):
         c.execute('SELECT  From FantasyTeam WHERE uid=%s', [uid])
         print("Extract Fantasy team info for user {0}".format(uid))
         return c.fetchall()
+    finally:
+        c.close()
+
+def getFantasyPlayers(uid):
+    c = connection.cursor()
+    try:
+        c.execute('SELECT name, pos \
+                   FROM (FantasyTeam NATURAL JOIN FantasyIsMem) \
+                   WHERE uid=%s', [uid])
+        content = c.fetchall()
+        return content
     finally:
         c.close()

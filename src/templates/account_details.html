@@ -19,5 +19,53 @@
     <p>Learn more about your favourite player: <a href="/players/{{favouritePlayer}}">{{favouritePlayer}}</a></p>
 </div>
 
+<div class="col-md-6 col-md-offset-3">
+	{% if fantasyTeam == "None" %}
+	{% else %}
+	    <p>Your customized team: <strong>{{fantasyTeam}}</strong></p>
+
+	    <table class="table table-bordered table-striped">
+		    <tr>
+		        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Point Guard</th>
+		        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Shooting Guard</th>
+		        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Small Forward</th>
+		        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Power Forward</th>
+		        <th style="text-align: left; border-bottom: 1px solid black; border-right: 1px solid black">Center</th>
+		    </tr>
+
+		    <tr>
+	            <td style="text-align: left; border-right: 1px solid black;">		<a href="/players/{{fantasyPlayers.PG}}">
+	            		{{fantasyPlayers.PG}}
+	            	</a>
+	            </td>
+	            <td style="text-align: left; border-right: 1px solid black;">
+	            	<a href="/players/{{fantasyPlayers.SG}}">
+	            		{{fantasyPlayers.SG}}
+	            	</a>
+	            </td>
+	            <td style="text-align: left; border-right: 1px solid black;">
+	            	<a href="/players/{{fantasyPlayers.SF}}">
+	            		{{fantasyPlayers.SF}}
+	            	</a>
+	            </td>
+	            <td style="text-align: left; border-right: 1px solid black;">
+	            	<a href="/players/{{fantasyPlayers.PF}}">
+	            		{{fantasyPlayers.PF}}
+	            	</a>
+	            </td>
+	            <td style="text-align: left; border-right: 1px solid black;">
+	            	<a href="/players/{{fantasyPlayers.C}}">
+	            		{{fantasyPlayers.C}}
+	            	</a>
+	            </td>
+	        </tr>
+		</table>
+	{% endif %}
+</div>    
+    
+
+
+
+
 
 <!-- Update link for learning about favourite player -->
