@@ -341,7 +341,7 @@ def createWhereCondition(attributes):
 
     NEEDS AGGREGATION
     """
-    where = ""
+    where = " WHERE "
     orderBy = ""
     if len(attributes):
         keys = []
@@ -381,7 +381,7 @@ def createWhereCondition(attributes):
         where = where[:-4] + orderBy
         if orderBy == " ORDER BY ":
             for key in keys:
-                where += key + "DESC, "
+                where += key + " DESC, "
             where = where[:-2] + ";"
         return where
 
@@ -410,8 +410,8 @@ def filterPlayers(attributes):
         if where is None:
             c.execute("SELECT " + select + " FROM PlayerStats;")
         else:
-            print("SELECT " + select + " FROM PlayerStats WHERE " + where)
-            c.execute("SELECT " + select + " FROM PlayerStats WHERE " + where)
+            print("SELECT " + select + " FROM PlayerStats" + where)
+            c.execute("SELECT " + select + " FROM PlayerStats" + where)
         rows = c.fetchall()
         rows = round_rows(rows)
         return rows

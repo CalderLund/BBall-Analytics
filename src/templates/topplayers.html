@@ -181,7 +181,7 @@
 		</div>
 		<br>
 		<div class="select-wrapper">
-			<input type="checkbox" id="sort" name="sort" value="FALSE">
+			<input type="checkbox" id="sort" name="sort" value="FALSE" onclick="toggleSort()">
 			<label for="sort"> Sort by attributes</label><br>
 		</div>
 		<div class="select-wrapper" id="requirement"></div>
@@ -439,13 +439,6 @@
 		    		html_code += requirement;
 				}
 				user_requirement.innerHTML = html_code;
-
-				let sort = document.getElementById('sort');
-				if (sort.checked) {
-					sort.value = "TRUE"
-				} else {
-					sort.value = "FALSE"
-				}
 			},
 	        classNames: {
 	          select: "select-pure__select",
@@ -465,6 +458,14 @@
 	      var resetAutocomplete = function() {
 	        instance.reset();
 	      };
+	      var toggleSort = function () {
+			  let sort = document.getElementById('sort');
+			  if (sort.checked) {
+				  sort.value = "TRUE"
+			  } else {
+				  sort.value = "FALSE"
+			  }
+		  };
 	</script>
 	<style>
 		.multiselect {
