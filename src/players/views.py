@@ -4,7 +4,7 @@ from .models import filterPlayers
 from .models import (createPlayerTable, dropTablePlayer, deleteAllRowsFromPlayer, populatePlayerData, getAllPlayers, createPlayerStatsTable,
 dropTablePlayerStats, deleteAllRowsFromPlayerStats, populatePlayerStatsData, insertIntoPlayerStats, getSomePlayerStats, 
 getPlayersFrom_Specific_Year, getPlayer_Stats_From_Specific_Year_For_Specific_team, create_PlayerName_Year_index,
-get_all_yearsAndTeam_a_player_played_for)
+get_all_yearsAndTeam_a_player_played_for, createPlayerScoreViews)
 
 # Create your views here.
 
@@ -21,6 +21,7 @@ def playerSetup(request):
     # insertIntoPlayerStats()
     # getSomePlayerStats()
     # create_PlayerName_Year_index()
+    createPlayerScoreViews()
     print("Player View's playerSetup() function called.")
     return redirect("/")
 

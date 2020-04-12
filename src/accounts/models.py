@@ -343,3 +343,130 @@ def getFantasyPlayers(uid):
         return content
     finally:
         c.close()
+
+def findUsageOrder(teamScores, positions = {"PG", "SG", "SF", "PF", "C"}):
+    if not positions:
+        return []
+    maxi = -1000000
+    first = ""
+    for pos in positions:
+        if teamScores[pos]["TS_percent"] > maxi:
+            maxi = teamScores[pos]["TS_percent"]
+            first = pos
+    return [first] + findUsageOrder(teamScores, positions - {first})
+
+
+def weightScores(teamScores):
+    weights = {"PG": {'TRB':0.4, 'AST':1.2, 'STL':0.9, 'BLK':0.5, 'TOV':0.75, 'TS_percent':40},
+               "SG": {'TRB':0.3, 'AST':1, 'STL':0.8, 'BLK':0.5, 'TOV':0.7, 'TS_percent':40},
+               "SF": {'TRB':0.5, 'AST':0.7, 'STL':0.7, 'BLK':0.7, 'TOV':0.65, 'TS_percent':40},
+               "PF": {'TRB':1, 'AST':0.4, 'STL':0.4, 'BLK':1, 'TOV':0.6, 'TS_percent':40},
+               "C":  {'TRB':1.5, 'AST':0.4, 'STL':0.3, 'BLK':1.1, 'TOV':0.5, 'TS_percent':40}}
+
+    total = {"Shooting":0, "Passing":0, "Rebounding":0, "Defense":0, "Overall":0}
+    for pos in ["PG", "SG", "SF", "PF", "C"]:
+        for attr in ["TRB", "AST", "STL", "BLK", "TOV", "TS_percent"]:
+            teamScores[pos][attr] *= weights[pos][attr]
+        total["Passing"]    += teamScores[pos]["AST"] - teamScores[pos]["TOV"]
+        total["Rebounding"] += teamScores[pos]["TRB"]
+        total["Defense"]    += teamScores[pos]["STL"] + teamScores[pos]["BLK"]
+
+    usageOrder = findUsageOrder(teamScores)
+    total["Shooting"] += teamScores[usageOrder[0]]["TS_percent"] * 0.3
+    total["Shooting"] += teamScores[usageOrder[1]]["TS_percent"] * 0.25
+    total["Shooting"] += teamScores[usageOrder[2]]["TS_percent"] * 0.2
+    total["Shooting"] += teamScores[usageOrder[3]]["TS_percent"] * 0.15
+    total["Shooting"] += teamScores[usageOrder[4]]["TS_percent"] * 0.1
+    total["Shooting"] *= 5
+
+    grades = {}
+    overall = 0
+    for cat in ("Shooting", "Passing", "Rebounding", "Defense"):
+        if total[cat] > 10:
+            grades[cat] = "A+"
+            overall += 0.25 * 100
+        elif total[cat] > 7:
+            grades[cat] = "A"
+            overall += 0.25 * 96
+        elif total[cat] > 5:
+            grades[cat] = "A-"
+            overall += 0.25 * 92
+        elif total[cat] > 3:
+            grades[cat] = "B+"
+            overall += 0.25 * 89
+        elif total[cat] > 1:
+            grades[cat] = "B"
+            overall += 0.25 * 86
+        elif total[cat] > -1:
+            grades[cat] = "B-"
+            overall += 0.25 * 82
+        elif total[cat] > -3:
+            grades[cat] = "C+"
+            overall += 0.25 * 79
+        elif total[cat] > -5:
+            grades[cat] = "C"
+            overall += 0.25 * 76
+        elif total[cat] > -7:
+            grades[cat] = "C-"
+            overall += 0.25 * 72
+        elif total[cat] > -9:
+            grades[cat] = "D+"
+            overall += 0.25 * 69
+        elif total[cat] > -11:
+            grades[cat] = "D"
+            overall += 0.25 * 66
+        elif total[cat] > -14:
+            grades[cat] = "D-"
+            overall += 0.25 * 62
+        else:
+            grades[cat] = "F"
+            overall += 0.25 * 32
+
+    if overall > 95:
+        grades["Overall"] = "A+"
+    elif overall > 90:
+        grades["Overall"] = "A"
+    elif overall > 85:
+        grades["Overall"] = "B+"
+    elif overall > 80:
+        grades["Overall"] = "B"
+    elif overall > 75:
+        grades["Overall"] = "C+"
+    elif overall > 70:
+        grades["Overall"] = "C"
+    elif overall > 65:
+        grades["Overall"] = "D+"
+    elif overall > 60:
+        grades["Overall"] = "D"
+    else:
+        grades["Overall"] = "F"
+
+    return grades
+
+
+def evaluateScore(team):
+    c = connection.cursor()
+    try:
+        teamScores = {}
+        for pos in ["PG", "SG", "SF", "PF", "C"]:
+            player = team[pos]
+            c.execute("SELECT * FROM PlayerScore WHERE name LIKE '%" + player + "%'")
+            playerAverages = c.fetchall()[0]
+
+            c.execute("SELECT * FROM Avg{}Score".format(pos))
+            positionAverages = c.fetchall()[0]
+
+            playerVsPos = {}
+            for i, attr in enumerate(["TRB", "AST", "STL", "BLK", "TOV", "TS_percent", "MP"]):
+                if float(playerAverages[i]) > 0:
+                    playerVsPos[attr] = float(playerAverages[i]) - float(positionAverages[i])
+                else:
+                    playerVsPos[attr] = 0
+
+            teamScores[pos] = playerVsPos
+
+        teamGrades = weightScores(teamScores)
+        return teamGrades
+
+    finally:
+        c.close()

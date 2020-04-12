@@ -417,3 +417,31 @@ def filterPlayers(attributes):
         return rows
     finally:
         c.close()
+
+def createPlayerScoreViews():
+    c = connection.cursor()
+    try:
+        c.execute("DROP VIEW IF EXISTS PlayerScore;")
+        playerScoreView = "CREATE VIEW PlayerScore AS" \
+                          "    SELECT AVG(TRB / G::numeric) AS TRB," \
+                          "           AVG(AST / G::numeric) AS AST, AVG(STL / G::numeric) AS STL," \
+                          "           AVG(BLK / G::numeric) AS BLK, AVG(TOV / G::numeric) AS TOV," \
+                          "           AVG(TS_percent) AS TS, AVG(MP) AS MP, name" \
+                          "    FROM PlayerStats" \
+                          "    GROUP BY name;"
+        c.execute(playerScoreView)
+
+        for pos in ["PG", "SG", "SF", "PF", "C"]:
+            c.execute("DROP VIEW IF EXISTS Avg{}Score;".format(pos))
+            averageScoreView = "CREATE VIEW Avg{}Score AS" \
+                               "    SELECT AVG(TRB / G::numeric) AS TRB," \
+                               "           AVG(AST / G::numeric) AS AST, AVG(STL / G::numeric) AS STL," \
+                               "           AVG(BLK / G::numeric) AS BLK, AVG(TOV / G::numeric) AS TOV," \
+                               "           AVG(TS_percent) AS TS, AVG(MP) AS MP" \
+                               "    FROM PlayerStats" \
+                               "    WHERE pos LIKE '%{}%' AND G > 10 AND MP / G::numeric > 10 " \
+                               "          AND STL > 0 AND BLK > 0;".format(pos, pos)
+            c.execute(averageScoreView)
+
+    finally:
+        c.close()

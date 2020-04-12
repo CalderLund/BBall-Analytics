@@ -5,7 +5,7 @@ createFavouriteTeamTable, insertIntoFavouriteTeam, dropTableFavouriteTeam, delet
 get_A_Given_Users_FavouriteTeam, getAllFavouriteTeamRows, createFavouritePlayerTable, dropTableFavouritePlayer, 
 deleteAllRowsFromFavouritePlayer, insertIntoFavouritePlayer, get_password_for_uid, deleteAccount, updateAccount_fav_team,
 updateAccount_fav_player, insertIntoFantasyTeam, createFantasyTeamTable, createFantasyIsMemTable, insertIntoFantasyIsMem, getFantasyPlayers,
-getFantasyTeam, updateFantasyTeam, updateFantasyIsMem)
+getFantasyTeam, updateFantasyTeam, updateFantasyIsMem, evaluateScore)
 
 # Create your views here.
 
@@ -91,8 +91,13 @@ def already_know_account_details(request, uid, username, tmId, tmName, playerNam
     for player in result:
         fantasyPlayers[player[1]] = player[0]
     print(fantasyPlayers)
+
+    teamScore = {}
+    if len(fantasyPlayers) == 5:
+        teamScore = evaluateScore(fantasyPlayers)
+
     # Also retrieve and send favourite player for this account (uid) to account_details.html
-    return render(request, "account_details.html", {"uid": uid, "username": username, "tmId": tmId, "favouriteTeam": tmName, "favouritePlayer": playerName, "fantasyTeam":fantasyTeam, "fantasyPlayers":fantasyPlayers})
+    return render(request, "account_details.html", {"uid": uid, "username": username, "tmId": tmId, "favouriteTeam": tmName, "favouritePlayer": playerName, "fantasyTeam":fantasyTeam, "fantasyPlayers":fantasyPlayers, "teamScore":teamScore})
 
 def all_accounts_view(request):
     # favouriteTeams is a list of tuples
