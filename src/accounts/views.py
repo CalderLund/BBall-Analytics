@@ -78,11 +78,16 @@ def account_details(request, uid, username):
                               "SF": SF_player_name,
                               "PF": PF_player_name,
                               "C": C_player_name,}
+
+            teamScore = {}
+            if len(fantasyPlayers) == 5:
+                teamScore = evaluateScore(fantasyPlayers)
+
         else:
             insertIntoFantasyTeam(uid, None)
         print("--------------------------------------")
         print(request.POST)
-        return render(request, "account_details.html", {"uid": uid, "username": username, "tmId": team_id,  "favouriteTeam": favouriteTeam, "favouritePlayer": favouritePlayer, "fantasyTeam":fantasy_team_name, "fantasyPlayers":fantasyPlayers})
+        return render(request, "account_details.html", {"uid": uid, "username": username, "tmId": team_id,  "favouriteTeam": favouriteTeam, "favouritePlayer": favouritePlayer, "fantasyTeam":fantasy_team_name, "fantasyPlayers":fantasyPlayers, "teamScore":teamScore})
     return redirect("/")
 
 def already_know_account_details(request, uid, username, tmId, tmName, playerName, fantasyTeam):
