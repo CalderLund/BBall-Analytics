@@ -432,6 +432,9 @@
 		    						       <option value="Utah Jazz">\
 		    						       <option value="Washington Wizards">\
 		    						   </datalist> <br>';
+					} else if (attr === 'name') {
+						requirement = `<label for=${attr}>${attr}:</label> \
+		    					   	   <input type="text" name=${attr}> <br>`
 					} else {
 							requirement = `<label for=${attr}>${attr}:</label> \
 		    					   	   <input type="number" name=${attr} value=0 step="0.01"> <br>`
