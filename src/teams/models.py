@@ -213,7 +213,7 @@ def countTeamStats():
 def getAllteamsInAYear(year):
     c = connection.cursor()
     try:
-        rows = c.execute("SELECT TeamInfo.team_id, team_name, yr from TeamInfo NATURAL JOIN TeamStats WHERE yr={}".format(year))
+        rows = c.execute("SELECT TeamInfo.team_id, team_name, yr, won, lost from TeamInfo NATURAL JOIN TeamStats WHERE yr={} ORDER BY won DESC".format(year))
         rows = c.fetchall()
         print(rows)
         return rows

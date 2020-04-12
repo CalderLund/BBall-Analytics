@@ -1,20 +1,31 @@
-<h1>Basketball Analytics!</h1>
+{% load bootstrap4 %}
 
-<button><a href="/">Go Back To Home Page</a></button>
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
 
-<p><strong>{{countOfTeams}}</strong> Teams played in the year {{year}}</p>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand mb-0 h1" href="/">Basketball Analytics!</a>
+    <div>
+        <button><a href="/">Go Back To Home Page</a></button>
+    </div>
+</nav>
 
-<table>
-    <tr>
-        <th style="text-align: left">Team ID</th>
-        <th style="text-align: left">Team Name</th>
-        <th style="text-align: left">Year</th>
-    </tr>
-    {% for team in teams %}
-        <tr>
-            <td style="text-align: left">{{team.0}}</td>
-            <td style="text-align: left"><a href="/team/{{team.0}}/{{team.1}}/{{team.2}}">{{team.1}}</a></td>
-            <td style="text-align: left">{{team.2}}</td>
-        </tr>
-    {% endfor %}
-</table>
+<div class="col-md-6 col-md-offset-3">
+    <p><strong>{{countOfTeams}}</strong> Teams played in the year {{year}}</p>
+    <div class="container">
+        <table>
+            <tr>
+                <th style="text-align: left">Team ID</th>
+                <th style="text-align: left">Team Name</th>
+                <th style="text-align: left">Win-Loss</th>
+            </tr>
+            {% for team in teams %}
+                <tr>
+                    <td style="text-align: left">{{team.0}}</td>
+                    <td style="text-align: left"><a href="/team/{{team.0}}/{{team.1}}/{{team.2}}">{{team.1}}</a></td>
+                    <td style="text-align: left">{{team.3}}-{{team.4}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
