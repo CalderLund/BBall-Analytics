@@ -1,3 +1,12 @@
+# Demo:
+Alex - Player Filter
+
+Dhanish - 1st feature in our report (just the flow of seeing teams' standing in a year, players who played in that year, team stats, player stats for that year etc.)
+
+Tianchang - Accounts
+
+Calder - 
+
 # To host the app locally:
 
 ### change to source code directory
