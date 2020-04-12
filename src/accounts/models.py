@@ -172,7 +172,7 @@ def deleteAllRowsFromFavouritePlayer():
 def insertIntoFavouritePlayer(name, uid):
     c = connection.cursor()
     try:
-        c.execute("INSERT INTO FavouritePlayer VALUES ((SELECT DISTINCT name FROM Player WHERE name LIKE '%" + str(name) + "%'), " + str(uid) + ")")
+        c.execute("INSERT INTO FavouritePlayer VALUES ((SELECT DISTINCT name FROM Player WHERE name LIKE $$" + str(name) + "%$$), " + str(uid) + ")")
         print("Inserted one row into FavouritePlayer")
     except IntegrityError as e:
         # redirect("/accounts/all")
@@ -222,7 +222,7 @@ def updateAccount_fav_team(uid, fav_team):
 def updateAccount_fav_player(uid, fav_player):
     c = connection.cursor()
     try:
-        c.execute("UPDATE FavouritePlayer SET name=(SELECT DISTINCT name FROM Player WHERE name LIKE '%" + str(fav_player) + "%') WHERE uid=" + str(uid))
+        c.execute("UPDATE FavouritePlayer SET name=(SELECT DISTINCT name FROM Player WHERE name LIKE $$" + str(fav_player) + "%$$) WHERE uid=" + str(uid))
         print("Updated name of one row from FavouritePlayer")
     except IntegrityError as e:
         redirect("/accounts/all")
@@ -297,7 +297,7 @@ def createFantasyIsMemTable():
 def insertIntoFantasyIsMem(uid, player_name, pos):
     c = connection.cursor()
     try:
-        c.execute("INSERT INTO FantasyIsMem VALUES (" + str(uid) + ", (SELECT DISTINCT name FROM Player WHERE name LIKE '%" + str(player_name) + "%'), '" + str(pos) + "')")
+        c.execute("INSERT INTO FantasyIsMem VALUES (" + str(uid) + ", (SELECT DISTINCT name FROM Player WHERE name LIKE $$" + str(player_name) + "%$$), '" + str(pos) + "')")
         print("Inserted one row into FantasyIsMem")
     finally:
         c.close()
@@ -305,8 +305,13 @@ def insertIntoFantasyIsMem(uid, player_name, pos):
 def updateFantasyIsMem(uid, player_name, pos):
     c = connection.cursor()
     try:
-        c.execute("UPDATE FantasyIsMem SET name=(SELECT DISTINCT name FROM Player WHERE name LIKE '%" + str(player_name) + "%') WHERE uid=" + str(uid) + " AND pos='" + str(pos) + "'")
-        print("Updated one player from FantasyIsMem")
+        c.execute("SELECT pos FROM FantasyIsMem WHERE uid=" + str(uid))
+        positions = c.fetchall()[0]
+        if pos in positions:
+            c.execute("UPDATE FantasyIsMem SET name=(SELECT DISTINCT name FROM Player WHERE name LIKE $$" + str(player_name) + "%$$) WHERE uid=" + str(uid) + " AND pos='" + str(pos) + "'")
+            print("Updated one player from FantasyIsMem")
+        else:
+            insertIntoFantasyIsMem(uid, player_name, pos)
     finally:
         c.close()
 
@@ -450,7 +455,7 @@ def evaluateScore(team):
         teamScores = {}
         for pos in ["PG", "SG", "SF", "PF", "C"]:
             player = team[pos]
-            c.execute("SELECT * FROM PlayerScore WHERE name LIKE '%" + player + "%'")
+            c.execute("SELECT * FROM PlayerScore WHERE name LIKE $$" + player + "%$$")
             playerAverages = c.fetchall()[0]
 
             c.execute("SELECT * FROM Avg{}Score".format(pos))

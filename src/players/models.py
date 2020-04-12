@@ -286,7 +286,8 @@ def getPlayersFrom_Specific_Year(teamID, year):
 def getPlayer_Stats_From_Specific_Year_For_Specific_team(teamID, year, playerName):
     c = connection.cursor()
     try:
-        c.execute("SELECT G, PTS, AST, TRB, STL, BLK, TOV, FG_percent, P3_percent, FT_percent, eFG_percent from PlayerStats WHERE name LIKE '%" + str(playerName) + "%' AND year=" + str(year) + " AND teamID='" + str(teamID) + "'")
+        c.execute("SELECT G, PTS, AST, TRB, STL, BLK, TOV, FG_percent, P3_percent, FT_percent, eFG_percent from PlayerStats WHERE name LIKE $$" + str(playerName) + "%$$ AND year=" + str(year) + " AND teamID='" + str(teamID) + "'")
+        print("SELECT G, PTS, AST, TRB, STL, BLK, TOV, FG_percent, P3_percent, FT_percent, eFG_percent from PlayerStats WHERE name LIKE $$" + str(playerName) + "%$$ AND year=" + str(year) + " AND teamID='" + str(teamID) + "'")
         playerStats = c.fetchall()
 
         modified = []
@@ -313,7 +314,7 @@ def create_PlayerName_Year_index():
 def get_all_yearsAndTeam_a_player_played_for(playerName):
     c = connection.cursor()
     try:
-        c.execute("select year, R.teamID, TeamInfo.team_name from (select year, teamID from PlayerStats WHERE name LIKE '%" + playerName + "%') AS R JOIN TeamInfo ON R.teamID=TeamInfo.team_id")
+        c.execute("select year, R.teamID, TeamInfo.team_name from (select year, teamID from PlayerStats WHERE name LIKE $$" + playerName + "%$$) AS R JOIN TeamInfo ON R.teamID=TeamInfo.team_id")
         years = c.fetchall()
         return years
     finally:
@@ -354,11 +355,11 @@ def createWhereCondition(attributes):
             key = key[0]
 
             if key in ("Pos", "name"):
-                where += " " + key + " LIKE '%" + value + "%' "
+                where += " " + key + " LIKE $$" + value + "%$$ "
                 keys.append(key)
             elif key == "teamID":
                 where = ", TeamInfo as t " + where
-                where += " t.team_name LIKE '%" + value + "%' AND t.team_id = teamID "
+                where += " t.team_name LIKE $$" + value + "%$$ AND t.team_id = teamID "
                 keys.append(key)
             elif key == "start_year":
                 where += " year >= " + value + " "
