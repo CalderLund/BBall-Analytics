@@ -60,6 +60,7 @@ def account_details(request, uid, username):
         # Fantasy Team Code Starts Here
         fantasy_team_name = "None"
         fantasyPlayers = None
+        teamScore = {}
         if "teamName" in request.POST:
             fantasy_team_name = request.POST["teamName"]
             PG_player_name = request.POST["PG"]
@@ -68,18 +69,24 @@ def account_details(request, uid, username):
             PF_player_name = request.POST["PF"]
             C_player_name = request.POST["C"]
             insertIntoFantasyTeam(uid, fantasy_team_name)
-            insertIntoFantasyIsMem(uid, PG_player_name, "PG")
-            insertIntoFantasyIsMem(uid, SG_player_name, "SG")
-            insertIntoFantasyIsMem(uid, SF_player_name, "SF")
-            insertIntoFantasyIsMem(uid, PF_player_name, "PF")
-            insertIntoFantasyIsMem(uid, C_player_name, "C")
-            fantasyPlayers = {"PG": PG_player_name,
-                              "SG": SG_player_name,
-                              "SF": SF_player_name,
-                              "PF": PF_player_name,
-                              "C": C_player_name,}
+            fantasyPlayers = {}
+            if PG_player_name:
+                insertIntoFantasyIsMem(uid, PG_player_name, "PG")
+                fantasyPlayers["PG"] = PG_player_name
+            if SG_player_name:
+                insertIntoFantasyIsMem(uid, SG_player_name, "SG")
+                fantasyPlayers["SG"] = SG_player_name
+            if SF_player_name:
+                insertIntoFantasyIsMem(uid, SF_player_name, "SF")
+                fantasyPlayers["SF"] = SF_player_name
+            if PF_player_name:
+                insertIntoFantasyIsMem(uid, PF_player_name, "PF")
+                fantasyPlayers["PF"] = PF_player_name
+            if C_player_name:
+                insertIntoFantasyIsMem(uid, C_player_name, "C")
+                fantasyPlayers["C"] = C_player_name
 
-            teamScore = {}
+
             if len(fantasyPlayers) == 5:
                 teamScore = evaluateScore(fantasyPlayers)
 
