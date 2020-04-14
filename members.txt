@@ -19,6 +19,12 @@ Milestone 1
 Milestone 2
 - Edit and finish report.pdf
 - Feature 2: Complicated user queries (SQL python side)
+Final Submission
+- Backend for Player Filter (Dynamic querying allows for user to query any metric they desire)
+- Advanced metric inplementation (Can use per36, PER, WS, and other advanced metrics in the player filter)
+- All time player statistics (Added functionality to player filter to sort by an attribute to find the leader)
+- Fantasy team evaluator implementation. Created Views and algorithms used to evaluate teams in each category, (Scoring, Passing, Rebounding, Defense, Overall)
+- Video demo for Fantasy Team + Team Evaluator features
 
 Tianchang:
 Milestone 0
