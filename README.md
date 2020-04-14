@@ -5,7 +5,7 @@ Dhanish - 1st feature in our report (just the flow of seeing teams' standing in 
 
 Tianchang - Accounts
 
-Calder - 
+Calder - Fantasy team & Team Evaluator
 
 # To host the app locally:
 
