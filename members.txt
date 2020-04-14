@@ -36,6 +36,9 @@ Milestone 1
 Milestone 2
 - Update README.md
 - Feature 3: Create views for advanced metrics
+Final Demo:
+- Designe UI and add css code to make application look better
+- Introduce Account feature in the demo
 
 Dhanish:
 Milestone 0
