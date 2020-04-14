@@ -38,7 +38,11 @@ Milestone 0
 Milestone 1
 - Code implementing a simple but working database-driven application which can serve as a starting point for completing our project
 Milestone 2
-- Feature 1: Select teams from year, then select players from teams, then view stats for player (see image in report.pdf)
+- Feature 1: Season Statistics feature (Select teams from year, then select players from teams, then view stats for player; see image in report.pdf)
+Final Demo:
+- Implemented User Accounts Feature
+- Wrote Favourite Player and Favourite Teams related back-end queries
+- Inroduced Season Statistics Feature in the demo
 
 Alex:
 Milestone 0
