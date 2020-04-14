@@ -50,3 +50,6 @@ Milestone 1
 Milestone 2
 - Update ER diagram
 - Feature 2: Complicated user queries (Django front end)
+Final Demo:
+- Implement Fantasy Team feature
+- Introduced Player filter feature in the demo
